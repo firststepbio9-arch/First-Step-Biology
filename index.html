@@ -3,379 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Step Biology - Homepage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>First Step Biology - Exam Preparation Coaching</title>
     <style>
-        /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
             line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        button {
-            cursor: pointer;
-        }
-
-        /* Header */
         header {
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        .header-content {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
         .logo {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #007bff;
         }
-        nav ul {
+        .nav-links {
             list-style: none;
             display: flex;
-            margin: 0;
-            padding: 0;
+            gap: 1rem;
         }
-        nav ul li {
-            margin-left: 30px;
-        }
-        nav ul li a {
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover {
-            color: #007bff;
-        }
-        .contact-info {
-            display: none; /* Hidden by default, shown on mobile via JS or media query */
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        .nav-links li a {
             color: white;
-            padding: 80px 0;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s;
+        }
+        .nav-links li a:hover {
+            background-color: #34495e;
+            border-radius: 4px;
+        }
+        .hero {
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            color: white;
             text-align: center;
+            padding: 4rem 1rem;
+            background-image: url('https://via.placeholder.com/1200x400?text=Biology+Background'); /* Placeholder for biological imagery */
+            background-size: cover;
+            background-position: center;
         }
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
         .hero p {
-            font-size: 24px;
-            margin-bottom: 30px;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
         .cta-button {
-            background-color: #ffffff;
-            color: #007bff;
-            padding: 15px 30px;
-            border: none;
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
             border-radius: 5px;
-            font-size: 18px;
             font-weight: bold;
             transition: background-color 0.3s;
         }
         .cta-button:hover {
-            background-color: #e9ecef;
+            background-color: #c0392b;
         }
-        .hero-icons {
+        .quick-links {
             display: flex;
             justify-content: center;
-            margin: 30px 0;
-        }
-        .hero-icons i {
-            font-size: 40px;
-            margin: 0 20px;
-            color: #ffffff;
-        }
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .search-bar button {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #007bff;
-            font-size: 18px;
-        }
-
-        /* Course Sections */
-        .courses-section {
-            padding: 60px 0;
-            background-color: #ffffff;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .section-header h2 {
-            font-size: 32px;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-        .section-header p {
-            font-size: 18px;
-            color: #666;
-        }
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .course-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        .course-card i {
-            font-size: 50px;
-            color: #007bff;
-            margin-bottom: 15px;
-        }
-        .course-card h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        .course-card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .open-button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        .open-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
             flex-wrap: wrap;
         }
-        .footer-logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #007bff;
+        .quick-links a {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
-        .footer-tagline {
-            font-size: 16px;
-            color: #ccc;
+        .quick-links a:hover {
+            background-color: #bdc3c7;
         }
-        .footer-links a {
-            color: #ccc;
-            margin: 0 10px;
-            transition: color 0.3s;
+        .highlights {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            text-align: center;
         }
-        .footer-links a:hover {
-            color: #007bff;
+        .highlights h2 {
+            color: #2c3e50;
         }
-        .footer-contact {
-            margin-top: 20px;
+        .highlight-cards {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-
-        /* Mobile Responsiveness */
+        .card {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .testimonials {
+            background-color: #ecf0f1;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
         @media (max-width: 768px) {
-            .header-content {
+            .nav-links {
                 flex-direction: column;
-                text-align: center;
-            }
-            nav ul {
-                margin-top: 15px;
-            }
-            nav ul li {
-                margin: 0 15px;
+                gap: 0.5rem;
             }
             .hero h1 {
-                font-size: 36px;
+                font-size: 2rem;
             }
             .hero p {
-                font-size: 18px;
+                font-size: 1rem;
             }
-            .hero-icons {
+            .highlight-cards {
                 flex-direction: column;
-            }
-            .hero-icons i {
-                margin: 10px 0;
-            }
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                flex-direction: column;
-            }
-            .footer-links {
-                margin-top: 20px;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="container header-content">
+        <nav>
             <div class="logo">First Step Biology</div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#tools">Tools</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="contact-info">
-                <p>Email: firststepbio9@gmail.com | Phone: +91 7001730930</p>
-            </div>
-        </div>
+            <ul class="nav-links">
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#test-series">Test Series</a></li>
+                <li><a href="#study-material">Study Material</a></li>
+                <li><a href="#demo-classes">Demo Classes</a></li>
+                <li><a href="#register">Register</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>The root of your Success</h1>
-            <p>Education.</p>
-            <button class="cta-button">Course Buy</button>
-            <div class="hero-icons">
-                <i class="fas fa-image"></i>
-                <i class="fas fa-file-alt"></i>
-                <i class="fas fa-code"></i>
-                <i class="fas fa-video"></i>
+    <main>
+        <section class="hero">
+            <h1>Welcome to First Step Biology</h1>
+            <p>Your gateway to success in biology-related competitive exams. Join our expert coaching for NEET, JEE, and more.</p>
+            <a href="#register" class="cta-button">Enroll Now</a>
+            <div class="quick-links">
+                <a href="#courses">Courses</a>
+                <a href="#test-series">Test Series</a>
+                <a href="#study-material">Study Material</a>
+                <a href="#demo-classes">Demo Classes</a>
+                <a href="#register">Registration</a>
             </div>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search a Courses">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Courses Section -->
-    <section class="courses-section" id="tools">
-        <div class="container">
-            <div class="section-header">
-                <h2>🖼 Competitive Exam</h2>
-                <p>Prepare for your future with our specialized courses in biology and nursing.</p>
-            </div>
-            <div class="courses-grid" id="coursesGrid">
-                <div class="course-card">
-                    <i class="fas fa-user-nurse"></i>
-                    <h3>ANM</h3>
-                    <p>Auxiliary Nurse Midwifery course for aspiring nurses.</p>
-                    <button class="open-button" onclick="window.location.href='#anm'">Open</button>
+        <section class="highlights">
+            <h2>Why Choose First Step Biology?</h2>
+            <div class="highlight-cards">
+                <div class="card">
+                    <h3>Expert Coaching</h3>
+                    <p>Learn from experienced instructors specializing in biology for competitive exams.</p>
                 </div>
-                <div class="course-card">
-                    <i class="fas fa-stethoscope"></i>
-                    <h3>GNM</h3>
-                    <p>General Nursing and Midwifery program.</p>
-                    <button class="open-button" onclick="window.location.href='#gnm'">Open</button>
+                <div class="card">
+                    <h3>Success Stories</h3>
+                    <p>Thousands of students have achieved top ranks with our proven methods.</p>
                 </div>
-                <div class="course-card">
-                    <i class="fas fa-heartbeat"></i>
-                    <h3>BSc Nursing</h3>
-                    <p>Bachelor of Science in Nursing degree.</p>
-                    <button class="open-button" onclick="window.location.href='#bsc-nursing'">Open</button>
-                </div>
-                <div class="course-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>NEET</h3>
-                    <p>National Eligibility cum Entrance Test preparation.</p>
-                    <button class="open-button" onclick="window.location.href='#neet'">Open</button>
-                </div>
-                <div class="course-card">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Higher Secondary</h3>
-                    <p>Advanced secondary education in biology.</p>
-                    <button class="open-button" onclick="window.location.href='#higher-secondary'">Open</button>
-                </div>
-                <div class="course-card">
-                    <i class="fas fa-microscope"></i>
-                    <h3>BSc Hons.</h3>
-                    <p>Bachelor of Science Honours in Biology.</p>
-                    <button class="open-button" onclick="window.location.href='#bsc-hons'">Open</button>
+                <div class="card">
+                    <h3>Comprehensive Resources</h3>
+                    <p>Access mock tests, study materials, and doubt-clearing sessions.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container footer-content">
-            <div>
-                <div class="footer-logo">First Step Biology</div>
-                <p class="footer-tagline">Simplifying your digital life.</p>
+        <section class="testimonials">
+            <h2>Student Testimonials</h2>
+            <div class="testimonial">
+                <p>"First Step Biology helped me ace my NEET exam. The coaching was top-notch!" - Priya S.</p>
             </div>
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Use</a>
+            <div class="testimonial">
+                <p>"Incredible study materials and mock tests. Highly recommend!" - Rahul M.</p>
             </div>
-        </div>
-        <div class="footer-contact">
-            <p>Contact: firststepbio9@gmail.com | Phone: +91 7001730930</p>
-        </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact us: info@firststepbiology.com | Phone: +1-123-456-7890 | Address: 123 Biology Lane, Science City</p>
+        <p>&copy; 2023 First Step Biology. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Simple search functionality
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.course-card');
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                if (title.includes(query)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
