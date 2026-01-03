@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Step Biology</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; color: #333; }
+        .navbar { background-color: #007bff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar-brand { font-weight: 600; font-size: 1.5rem; }
+        .btn-primary { background-color: #007bff; border-color: #007bff; }
+        .btn-primary:hover { background-color: #0056b3; }
+        .hero { position: relative; height: 60vh; overflow: hidden; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,123,255,0.5); display: flex; align-items: center; justify-content: center; }
+        .hero-overlay a { color: white; font-size: 1.5rem; text-decoration: none; padding: 10px 20px; border: 2px solid white; border-radius: 5px; }
+        .search-section { background-color: white; padding: 50px 0; text-align: center; }
+        .course-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; margin-bottom: 20px; }
+        .course-card:hover { transform: translateY(-5px); }
+        .course-icon { font-size: 3rem; color: #007bff; margin-bottom: 15px; }
+        .footer { background-color: #007bff; color: white; padding: 40px 0; text-align: center; }
+        .modal-content { border-radius: 10px; }
+        @media (max-width: 768px) { .hero { height: 40vh; } .navbar-nav { text-align: center; } }
+    </style>
+</head>
+<body>
+
+    <!-- Top Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">First Step Biology</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Study Materials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Syllabus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                    <a href="admin_login.php" class="btn btn-warning ms-2">Admin Panel</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="heroCarousel" class="carousel slide hero" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://via.placeholder.com/1200x600/007bff/ffffff?text=Biology+Hero+1" alt="Hero Image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/1200x600/0056b3/ffffff?text=Biology+Hero+2" alt="Hero Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/1200x600/004085/ffffff?text=Biology+Hero+3" alt="Hero Image 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+        <div class="hero-overlay">
+            <a href="#placeholder-link">Explore Now</a>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h1 class="display-4">The Root of Your Success</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <input type="text" id="courseSearch" class="form-control form-control-lg" placeholder="Search a Course" onkeyup="filterCourses()">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Sections -->
+    <section class="py-5">
+        <div class="container">
+            <!-- School Boards and University -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-3"><i class="fas fa-school"></i> School Boards and University</h2>
+                    <p class="text-center text-muted">Comprehensive courses for school and university levels to build strong biology foundations.</p>
+                </div>
+            </div>
+            <div class="row" id="schoolCourses">
+                <div class="col-md-3 col-sm-6 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-book course-icon"></i>
+                        <h5>Class 9th</h5>
+                        <p>Fundamental biology concepts for beginners.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-microscope course-icon"></i>
+                        <h5>Class 10th</h5>
+                        <p>Advanced topics in cell biology and ecology.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-dna course-icon"></i>
+                        <h5>Class 11th</h5>
+                        <p>Dive into genetics and human physiology.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-leaf course-icon"></i>
+                        <h5>Class 12th</h5>
+                        <p>Master plant and animal kingdoms.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-graduation-cap course-icon"></i>
+                        <h5>BSc Hons. Botany</h5>
+                        <p>Specialized study in plant sciences.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 course-card-container">
+                    <i class="fas fa-paw course-icon"></i>
+                    <h5>BSc Hons. Zoology</h5>
+                    <p>Explore animal biology and behavior.</p>
+                    <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- Competitive Exam -->
+            <div class="row mb-5 mt-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-3"><i class="fas fa-trophy"></i> Competitive Exam</h2>
+                    <p class="text-center text-muted">Prepare for top competitive exams with targeted biology courses.</p>
+                </div>
+            </div>
+            <div class="row" id="examCourses">
+                <div class="col-md-4 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-user-nurse course-icon"></i>
+                        <h5>ANM/GNM</h5>
+                        <p>Nursing fundamentals and biology essentials.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-stethoscope course-icon"></i>
+                        <h5>BSc Nursing</h5>
+                        <p>Comprehensive nursing and medical biology.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 course-card-container">
+                    <div class="course-card p-4 text-center">
+                        <i class="fas fa-brain course-icon"></i>
+                        <h5>NEET</h5>
+                        <p>Crack NEET with expert biology prep.</p>
+                        <a href="#placeholder-link" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>First Step Biology</h5>
+                    <p>Your first step to mastering biology.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p>Email: firststepbio9@gmail.com</p>
+                    <p>Phone: +91 7001730930</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginMobile" class="form-label">Mobile Number</label>
+                            <input type="text" class="form-control" id="loginMobile" placeholder="Enter registered mobile number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="regName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="regName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="regMobile" class="form-label">Mobile Number</label>
+                            <input type="text" class="form-control" id="regMobile">
+                        </div>
+                        <div class="mb-3">
+                            <label for="regAddress" class="form-label">Address</label>
+                            <textarea class="form-control" id="regAddress"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="regPassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function filterCourses() {
+            const query = document.getElementById('courseSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.course-card-container');
+            cards.forEach(card => {
+                const title = card.querySelector('h5').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
