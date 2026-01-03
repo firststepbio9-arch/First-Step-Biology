@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - First Step Biology</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #f8f9fa; }
+        .sidebar { background-color: #007bff; color: #fff; min-height: 100vh; }
+        .sidebar a { color: #fff; text-decoration: none; }
+        .sidebar a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <!-- Login Form (if not logged in) -->
+    <div id="loginForm" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Admin Login</h5>
+                        <form id="adminLoginForm">
+                            <div class="mb-3">
+                                <label>ID</label>
+                                <input type="text" class="form-control" id="adminId" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="adminPass" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard (shown after login) -->
+    <div id="dashboard" style="display: none;">
+        <div class="d-flex">
+            <!-- Sidebar -->
+            <nav class="sidebar p-3">
+                <h4>Admin Panel</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#dashboard" onclick="showSection('dashboard')">Dashboard</a></li>
+                    <li><a href="#manageCourses" onclick="showSection('manageCourses')">Manage Courses</a></li>
+                    <li><a href="#manageCategories" onclick="showSection('manageCategories')">Manage Categories</a></li>
+                    <li><a href="#manageOrders" onclick="showSection('manageOrders')">Manage Orders</a></li>
+                    <li><a href="#manageUsers" onclick="showSection('manageUsers')">Manage Users</a></li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid p-4">
+                <div id="dashboardContent">
+                    <h2>Dashboard</h2>
+                    <div class="row">
+                        <div class="col-md-3
