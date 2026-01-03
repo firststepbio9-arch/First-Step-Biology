@@ -1,61 +1,189 @@
+<?php
+session_start();
+include 'config.php';
+
+if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: admin_login.php");
+    exit;
+}
+
+// Handle actions (e.g., confirm order)
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_order'])) {
+    $order_id = $_POST['order_id'];
+    $conn->query("UPDATE transactions SET order_status = 'confirmed' WHERE id = $order_id");
+    header("Location: admin_panel.php?view=admin");
+    exit;
+}
+
+// Fetch stats for dashboard
+$total_users = $conn->query("SELECT COUNT(*) as count FROM users WHERE role != 'admin'")->fetch_assoc()['count'];
+$total_courses = $conn->query("SELECT COUNT(*) as count FROM courses")->fetch_assoc()['count'];
+$total_orders = $conn->query("SELECT COUNT(*) as count FROM transactions")->fetch_assoc()['count'];
+
+// Fetch sales data for chart (e.g., monthly totals)
+$sales_data = $conn->query("SELECT MONTH(purchase_timestamp) as month, SUM(total_amount) as total FROM transactions GROUP BY MONTH(purchase_timestamp)");
+$sales_labels = [];
+$sales_values = [];
+while ($row = $sales_data->fetch_assoc()) {
+    $sales_labels[] = "Month " . $row['month'];
+    $sales_values[] = $row['total'];
+}
+
+// Fetch transactions
+$transactions = $conn->query("SELECT t.id, u.username, t.payer_email, t.courses_purchased, t.total_amount, t.order_status, t.purchase_timestamp FROM transactions t LEFT JOIN users u ON t.user_id = u.id ORDER BY t.purchase_timestamp DESC");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - First Step Biology</title>
+    <title>Admin Panel</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { background-color: #f8f9fa; }
-        .sidebar { background-color: #007bff; color: #fff; min-height: 100vh; }
-        .sidebar a { color: #fff; text-decoration: none; }
-        .sidebar a:hover { background-color: #0056b3; }
-    </style>
 </head>
 <body>
-    <!-- Login Form (if not logged in) -->
-    <div id="loginForm" class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Admin Login</h5>
-                        <form id="adminLoginForm">
-                            <div class="mb-3">
-                                <label>ID</label>
-                                <input type="text" class="form-control" id="adminId" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Password</label>
-                                <input type="Genomics@83" class="form-control" id="fsbiology@83" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
-                </div>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav class="bg-dark text-white" style="width: 250px; min-height: 100vh;">
+            <div class="p-3">
+                <h4>Admin Panel</h4>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link text-white" href="#dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#manage-courses">Manage Courses</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#manage-categories">Manage Categories</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#manage-orders">Manage Orders</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#manage-users">Manage Users</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#view-transactions">View Transactions</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="logout.php">Logout</a></li>
+                </ul>
             </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex-grow-1 p-4">
+            <h1>Dashboard</h1>
+            <div class="row mb-4">
+                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Total Users</h5><p><?php echo $total_users; ?></p></div></div></div>
+                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Total Courses</h5><p><?php echo $total_courses; ?></p></div></div></div>
+                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Total Orders</h5><p><?php echo $total_orders; ?></p></div></div></div>
+                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Sales Chart</h5><canvas id="salesChart"></canvas></div></div></div>
+            </div>
+
+            <!-- Manage Courses -->
+            <section id="manage-courses" class="mb-5">
+                <h2>Manage Courses</h2>
+                <!-- Add/Edit/Delete forms here (simplified; expand with modals) -->
+                <button class="btn btn-primary">Add Course</button>
+                <table class="table table-striped">
+                    <thead><tr><th>ID</th><th>Title</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <?php
+                        $courses = $conn->query("SELECT * FROM courses");
+                        while ($course = $courses->fetch_assoc()) {
+                            echo "<tr><td>{$course['id']}</td><td>{$course['title']}</td><td><a href='edit_course.php?id={$course['id']}'>Edit</a> | <a href='delete.php?type=course&id={$course['id']}'>Delete</a></td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Manage Categories (similar to courses) -->
+            <section id="manage-categories" class="mb-5">
+                <h2>Manage Categories</h2>
+                <button class="btn btn-primary">Add Category</button>
+                <table class="table table-striped">
+                    <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <?php
+                        $categories = $conn->query("SELECT * FROM categories");
+                        while ($cat = $categories->fetch_assoc()) {
+                            echo "<tr><td>{$cat['id']}</td><td>{$cat['name']}</td><td><a href='edit_category.php?id={$cat['id']}'>Edit</a> | <a href='delete.php?type=category&id={$cat['id']}'>Delete</a></td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Manage Orders -->
+            <section id="manage-orders" class="mb-5">
+                <h2>Manage Orders</h2>
+                <table class="table table-striped">
+                    <thead><tr><th>ID</th><th>User</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <?php
+                        $orders = $conn->query("SELECT t.id, u.username, t.order_status FROM transactions t LEFT JOIN users u ON t.user_id = u.id");
+                        while ($order = $orders->fetch_assoc()) {
+                            echo "<tr><td>{$order['id']}</td><td>{$order['username'] ?: 'Guest'}</td><td>{$order['order_status']}</td><td><a href='update_status.php?id={$order['id']}&status=delivered'>Mark Delivered</a></td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Manage Users -->
+            <section id="manage-users" class="mb-5">
+                <h2>Manage Users</h2>
+                <table class="table table-striped">
+                    <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <?php
+                        $users = $conn->query("SELECT * FROM users WHERE role != 'admin'");
+                        while ($user = $users->fetch_assoc()) {
+                            echo "<tr><td>{$user['id']}</td><td>{$user['username']}</td><td>{$user['email']}</td><td><a href='delete.php?type=user&id={$user['id']}'>Delete</a></td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- View Transactions -->
+            <section id="view-transactions" class="mb-5">
+                <h2>View Transactions</h2>
+                <table class="table table-striped">
+                    <thead><tr><th>Transaction ID</th><th>User</th><th>Payer Email</th><th>Courses Purchased</th><th>Total Amount</th><th>Order Status</th><th>Purchase Timestamp</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <?php while ($trans = $transactions->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $trans['id']; ?></td>
+                                <td><?php echo $trans['username'] ?: 'Guest'; ?></td>
+                                <td><?php echo $trans['payer_email']; ?></td>
+                                <td><?php echo $trans['courses_purchased']; ?></td>
+                                <td><?php echo $trans['total_amount']; ?></td>
+                                <td><?php echo $trans['order_status']; ?></td>
+                                <td><?php echo $trans['purchase_timestamp']; ?></td>
+                                <td>
+                                    <?php if ($trans['order_status'] == 'pending'): ?>
+                                        <form method="POST" style="display:inline;">
+                                            <input type="hidden" name="order_id" value="<?php echo $trans['id']; ?>">
+                                            <button type="submit" name="confirm_order" class="btn btn-success btn-sm">Confirm</button>
+                                        </form>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </section>
         </div>
     </div>
 
-    <!-- Dashboard (shown after login) -->
-    <div id="dashboard" style="display: none;">
-        <div class="d-flex">
-            <!-- Sidebar -->
-            <nav class="sidebar p-3">
-                <h4>Admin Panel</h4>
-                <ul class="list-unstyled">
-                    <li><a href="#dashboard" onclick="showSection('dashboard')">Dashboard</a></li>
-                    <li><a href="#manageCourses" onclick="showSection('manageCourses')">Manage Courses</a></li>
-                    <li><a href="#manageCategories" onclick="showSection('manageCategories')">Manage Categories</a></li>
-                    <li><a href="#manageOrders" onclick="showSection('manageOrders')">Manage Orders</a></li>
-                    <li><a href="#manageUsers" onclick="showSection('manageUsers')">Manage Users</a></li>
-                </ul>
-            </nav>
-
-            <!-- Main Content -->
-            <div class="container-fluid p-4">
-                <div id="dashboardContent">
-                    <h2>Dashboard</h2>
-                    <div class="row">
-                        <div class="col-md-3
+    <script>
+        // Sales Chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($sales_labels); ?>,
+                datasets: [{
+                    label: 'Sales',
+                    data: <?php echo json_encode($sales_values); ?>,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false
+                }]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+</body>
+</html>
