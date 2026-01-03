@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Step Biology | The Root of Your Success</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --accent: #007bff;
+            --light-bg: #f4f7f9;
+            --white: #ffffff;
+            --text: #333;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Open Sans', sans-serif; }
+        body { background: var(--light-bg); color: var(--text); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #0056b3);
+            color: white;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a:hover { color: #80bdff; }
+        .cta-btns .btn {
+            background: var(--white);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .cta-btns .btn:hover { background: #e0e0e0; transform: scale(1.05); }
+
+        /* Hero Slider */
+        .hero { position: relative; height: 450px; overflow: hidden; }
+        .slide { 
+            position: absolute; width: 100%; height: 100%; opacity: 0; 
+            transition: opacity 1s ease-in-out; 
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .slide.active { opacity: 1; }
+        .slide-content { background: rgba(0,0,0,0.5); color: white; padding: 2rem; border-radius: 10px; text-align: center; }
+
+        /* Sections */
+        .container { padding: 40px 5%; }
+        .section-title { margin-bottom: 30px; border-left: 5px solid var(--accent); padding-left: 15px; }
+        .search-container { text-align: center; margin: -30px auto 40px; position: relative; z-index: 10; width: 80%; max-width: 600px; }
+        .search-bar { width: 100%; padding: 15px 25px; border-radius: 30px; border: none; box-shadow: var(--shadow); font-size: 1rem; }
+
+        /* Grid & Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { 
+            background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); 
+            transition: 0.3s; position: relative; border-bottom: 4px solid transparent;
+        }
+        .card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--accent); }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 20px; }
+        .card-title { font-weight: 700; margin-bottom: 10px; }
+        .price { color: var(--accent); font-weight: 700; font-size: 1.2rem; }
+        .btn-buy { 
+            display: block; width: 100%; background: var(--accent); color: white; 
+            text-align: center; padding: 10px; border-radius: 8px; margin-top: 15px; transition: 0.3s;
+        }
+        .btn-buy:hover { background: var(--primary); }
+
+        /* Forms */
+        .auth-form { max-width: 450px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); }
+        .auth-form h2 { margin-bottom: 20px; color: var(--primary); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        .btn-submit { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; }
+
+        /* Cart & Payment */
+        .cart-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+        .cart-table th, .cart-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        .payment-box { display: flex; flex-wrap: wrap; gap: 40px; background: white; padding: 30px; border-radius: 15px; }
+        .qr-section { flex: 1; text-align: center; min-width: 300px; }
+        .qr-section img { max-width: 250px; border: 10px solid #eee; }
+
+        /* Footer */
+        footer { background: #001a33; color: white; padding: 40px 5%; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        
+        /* Utility */
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">First Step Biology</div>
+    <nav>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="mailto:firststepbio9@gmail.com">Contact</a></li>
+            <li><a href="?view=cart"><i class="fas fa-shopping-cart"></i> Cart (<span id="cart-count"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?></span>)</a></li>
+        </ul>
+    </nav>
+    <div class="cta-btns">
+        <?php if(isset($_SESSION['user_id'])): ?>
+            <?php if($_SESSION['role'] == 'admin'): ?><a href="?view=admin" class="btn">Admin</a><?php endif; ?>
+            <a href="?logout=1" class="btn">Logout (<?php echo $_SESSION['username']; ?>)</a>
+        <?php else: ?>
+            <a href="?view=login" class="btn">Login</a>
+            <a href="?view=register" class="btn">Register</a>
+        <?php endif; ?>
+    </div>
+</header>
+
+<?php if(isset($_SESSION['msg'])): ?>
+    <div style="background: #d4edda; color: #155724; padding: 15px; text-align: center;">
+        <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if($view == 'home'): ?>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1532187875605-1ef6c237a1e1?auto=format&fit=crop&w=1200')">
+            <div class="slide-content">
+                <h1>Excel in Biology</h1>
+                <p>From School Boards to Medical Entrances.</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1200')">
+            <div class="slide-content">
+                <h1>Competitive Excellence</h1>
+                <p>Prepare for NEET, Nursing, and Beyond.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="search-container">
+            <h2 style="margin-bottom: 20px;">The Root of Your Success</h2>
+            <input type="text" id="courseSearch" class="search-bar" placeholder="Search a Courses (e.g. NEET, Class 10)...">
+        </div>
+
+        <div id="courses">
+            <?php 
+            $categories = ['School Boards', 'University', 'Competitive Exam'];
+            foreach($categories as $cat): 
+            ?>
+                <div class="section-title fade-in">
+                    <h2>🖼 <?php echo $cat; ?></h2>
+                    <p>High-quality study materials tailored for <?php echo $cat; ?> success.</p>
+                </div>
+                <div class="grid fade-in">
+                    <?php foreach($courses as $c): if($c['category'] != $cat) continue; ?>
+                        <div class="card course-card" data-name="<?php echo strtolower($c['name']); ?>">
+                            <img src="<?php echo $c['img']; ?>" alt="Course">
+                            <div class="card-body">
+                                <div class="card-title"><?php echo $c['name']; ?></div>
+                                <p style="font-size: 0.9rem; color: #666; height: 40px;"><?php echo $c['desc']; ?></p>
+                                <div class="price">₹<?php echo $c['price']; ?></div>
+                                <button onclick="addToCart(<?php echo $c['id']; ?>)" class="btn-buy" style="border:none; cursor:pointer;">Buy Now</button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <br><br>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+<?php elseif($view == 'register'): ?>
+    <div class="auth-form fade-in">
+        <h2>Register</h2>
+        <form method="POST">
+            <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
+            <div class="form-group"><label>Mobile No</label><input type="text" name="mobile" required></div>
+            <div class="form-group"><label>Address</label><textarea name="address" required></textarea></div>
+            <div class="form-group"><label>Password</label><input type="password" name="password" required></div>
+            <button type="submit" name="register" class="btn-submit">Register</button>
+        </form>
+    </div>
+
+<?php elseif($view == 'login'): ?>
+    <div class="auth-form fade-in">
+        <h2>Login</h2>
+        <?php if(isset($error)) echo "<p style='color:red'>$error</p>"; ?>
+        <form method="POST">
+            <div class="form-group"><label>Registered Mobile Number</label><input type="text" name="mobile" required></div>
+            <div class="form-group"><label>Password</label><input type="password" name="password" required></div>
+            <button type="submit" name="login" class="btn-submit">Login</button>
+        </form>
+    </div>
+
+<?php elseif($view == 'cart'): ?>
+    <div class="container fade-in">
+        <h2>Your Shopping Cart</h2><br>
+        <?php if(empty($_SESSION['cart'])): ?>
+            <p>Your cart is empty. <a href="index.php" style="color:var(--accent)">Go back to courses.</a></p>
+        <?php else: ?>
+            <table class="cart-table">
+                <thead><tr><th>Course</th><th>Price</th><th>Action</th></tr></thead>
+                <tbody>
+                    <?php 
+                    $total = 0;
+                    foreach($_SESSION['cart'] as $cid): 
+                        $key = array_search($cid, array_column($courses, 'id'));
+                        $item = $courses[$key];
+                        $total += $item['price'];
+                    ?>
+                    <tr>
+                        <td><?php echo $item['name']; ?></td>
+                        <td>₹<?php echo $item['price']; ?></td>
+                        <td><a href="?view=cart&remove=<?php echo $cid; ?>" style="color:red">Remove</a></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div style="text-align:right; margin-top:20px;">
+                <h3>Total: ₹<?php echo $total; ?></h3><br>
+                <a href="index.php" class="btn" style="background:#666; color:white; padding:10px 20px; border-radius:5px;">Continue Shopping</a>
+                <a href="?view=payment" class="btn-buy" style="display:inline-block; width:200px; margin-top:0;">Proceed to Payment</a>
+            </div>
+        <?php endif; ?>
+    </div>
+    <?php 
+    if(isset($_GET['remove'])){
+        $id = $_GET['remove'];
+        if (($key = array_search($id, $_SESSION['cart'])) !== false) {
+            unset($_SESSION['cart'][$key]);
+        }
+        header("Location: ?view=cart");
+    }
+    ?>
+
+<?php elseif($view == 'payment'): ?>
+    <div class="container fade-in">
+        <h2>Complete Your Purchase</h2><br>
+        <?php
+        $total = 0;
+        foreach($_SESSION['cart'] as $cid) {
+            $key = array_search($cid, array_column($courses, 'id'));
+            $total += $courses[$key]['price'];
+        }
+        ?>
+        <div class="payment-box">
+            <div class="qr-section">
+                <h3>Scan to Pay</h3>
+                <p>Amount: ₹<?php echo $total; ?></p><br>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=7001730930@upi&am=<?php echo $total; ?>&tn=FirstStepBiology" alt="QR Code">
+                <p style="margin-top:10px; color:#666;">Scan using GPay, PhonePe, or Paytm</p>
+            </div>
+            <div style="flex:1; min-width:300px;">
+                <form method="POST">
+                    <div class="form-group">
+                        <label>Email Address (For PDF Delivery)</label>
+                        <input type="email" name="email" value="<?php echo $_SESSION['email'] ?? ''; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Transaction ID / UTR No.</label>
+                        <input type="text" name="transaction_id" placeholder="Enter the 12-digit ID" required>
+                    </div>
+                    <button type="submit" name="confirm_purchase" class="btn-submit">Confirm Purchase</button>
+                    <a href="?view=cart" style="display:block; text-align:center; margin-top:15px; color:var(--accent);">Back to Cart</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php elseif($view == 'admin' && $_SESSION['role'] == 'admin'): ?>
+    <div class="container fade-in">
+        <h2>Admin Panel - Transactions</h2><br>
+        <table class="cart-table" style="font-size: 0.9rem;">
+            <thead>
+                <tr>
+                    <th>Date</th><th>Payer Email</th><th>Courses</th><th>Amount</th><th>Status</th><th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $stmt = $pdo->query("SELECT * FROM transactions ORDER BY purchase_timestamp DESC");
+                while($row = $stmt->fetch()):
+                ?>
+                <tr>
+                    <td><?php echo $row['purchase_timestamp']; ?></td>
+                    <td><?php echo $row['email']; ?><br><small>ID: <?php echo $row['transaction_id']; ?></small></td>
+                    <td><?php echo $row['courses_purchased']; ?></td>
+                    <td>₹<?php echo $row['total_amount']; ?></td>
+                    <td><span style="color:<?php echo $row['order_status']=='Confirmed'?'green':'orange'; ?>"><?php echo $row['order_status']; ?></span></td>
+                    <td>
+                        <?php if($row['order_status'] == 'Pending'): ?>
+                            <a href="?confirm_order=<?php echo $row['id']; ?>" class="btn" style="background:green; color:white; padding:5px 10px; font-size:0.8rem;">Confirm</a>
+                        <?php else: ?>
+                            -
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif; ?>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="logo">First Step Biology</div>
+            <p>The Root of Your Success</p><br>
+            <p><i class="fas fa-envelope"></i> firststepbio9@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +91 7001730930</p>
+        </div>
+        <div>
+            <h4>Quick Links</h4><br>
+            <p><a href="#">Privacy Policy</a></p>
+            <p><a href="#">Terms of Use</a></p>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top:30px; border-top:1px solid #003366; padding-top:20px;">
+        &copy; 2024 First Step Biology. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    // Search Functionality
+    const searchInput = document.getElementById('courseSearch');
+    if(searchInput) {
+        searchInput.addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.course-card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                card.style.display = name.includes(term) ? 'block' : 'none';
+            });
+        });
+    }
+
+    // Slider Functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    if(slides.length > 0) {
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+    }
+
+    // AJAX Cart
+    function addToCart(id) {
+        const formData = new FormData();
+        formData.append('ajax_action', 'add_to_cart');
+        formData.append('item_id', id);
+
+        fetch('index.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(count => {
+            document.getElementById('cart-count').innerText = count;
+            alert("Course added to cart!");
+            window.location.href = "?view=cart";
+        });
+    }
+</script>
+</body>
+</html>
