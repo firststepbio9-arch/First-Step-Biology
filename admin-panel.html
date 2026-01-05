@@ -1,189 +1,461 @@
-<?php
-session_start();
-include 'config.php';
-
-if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: admin_login.php");
-    exit;
-}
-
-// Handle actions (e.g., confirm order)
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_order'])) {
-    $order_id = $_POST['order_id'];
-    $conn->query("UPDATE transactions SET order_status = 'confirmed' WHERE id = $order_id");
-    header("Location: admin_panel.php?view=admin");
-    exit;
-}
-
-// Fetch stats for dashboard
-$total_users = $conn->query("SELECT COUNT(*) as count FROM users WHERE role != 'admin'")->fetch_assoc()['count'];
-$total_courses = $conn->query("SELECT COUNT(*) as count FROM courses")->fetch_assoc()['count'];
-$total_orders = $conn->query("SELECT COUNT(*) as count FROM transactions")->fetch_assoc()['count'];
-
-// Fetch sales data for chart (e.g., monthly totals)
-$sales_data = $conn->query("SELECT MONTH(purchase_timestamp) as month, SUM(total_amount) as total FROM transactions GROUP BY MONTH(purchase_timestamp)");
-$sales_labels = [];
-$sales_values = [];
-while ($row = $sales_data->fetch_assoc()) {
-    $sales_labels[] = "Month " . $row['month'];
-    $sales_values[] = $row['total'];
-}
-
-// Fetch transactions
-$transactions = $conn->query("SELECT t.id, u.username, t.payer_email, t.courses_purchased, t.total_amount, t.order_status, t.purchase_timestamp FROM transactions t LEFT JOIN users u ON t.user_id = u.id ORDER BY t.purchase_timestamp DESC");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <!-- MDBootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet">
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+    </style>
 </head>
 <body>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <nav class="bg-dark text-white" style="width: 250px; min-height: 100vh;">
-            <div class="p-3">
-                <h4>Admin Panel</h4>
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link text-white" href="#dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#manage-courses">Manage Courses</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#manage-categories">Manage Categories</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#manage-orders">Manage Orders</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#manage-users">Manage Users</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#view-transactions">View Transactions</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="logout.php">Logout</a></li>
-                </ul>
+    <!-- Login Form -->
+    <div id="login-section" class="login-form">
+        <h2>Admin Login</h2>
+        <form id="login-form">
+            <div class="mb-3">
+                <label for="admin-id" class="form-label">Admin ID</label>
+                <input type="text" class="form-control" id="admin-id" required>
             </div>
-        </nav>
+            <div class="mb-3">
+                <label for="admin-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="admin-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
 
-        <!-- Main Content -->
-        <div class="flex-grow-1 p-4">
-            <h1>Dashboard</h1>
-            <div class="row mb-4">
-                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Total Users</h5><p><?php echo $total_users; ?></p></div></div></div>
-                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Total Courses</h5><p><?php echo $total_courses; ?></p></div></div></div>
-                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Total Orders</h5><p><?php echo $total_orders; ?></p></div></div></div>
-                <div class="col-md-3"><div class="card"><div class="card-body"><h5>Sales Chart</h5><canvas id="salesChart"></canvas></div></div></div>
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="hidden">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h4 class="text-center">Admin Panel</h4>
+            <a href="#" onclick="showSection('dashboard')">Dashboard</a>
+            <a href="#" onclick="showSection('transactions')">View Transactions</a>
+            <a href="#" onclick="showSection('manage-courses')">Manage Courses</a>
+            <a href="#" onclick="showSection('manage-categories')">Manage Categories</a>
+            <a href="#" onclick="showSection('manage-payments')">Manage Payments</a>
+            <a href="#" onclick="showSection('manage-users')">Manage Users</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Dashboard -->
+            <div id="dashboard" class="section">
+                <h2>Dashboard</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Total Users</h5>
+                                <p id="total-users">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Total Courses</h5>
+                                <p id="total-courses">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Total Orders</h5>
+                                <p id="total-orders">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Total Sales</h5>
+                                <p id="total-sales">$0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <canvas id="sales-chart"></canvas>
+            </div>
+
+            <!-- View Transactions -->
+            <div id="transactions" class="section hidden">
+                <h2>View Transactions</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>User Name</th>
+                            <th>Courses Purchased</th>
+                            <th>Total Amount</th>
+                            <th>Payment Status</th>
+                            <th>Purchase Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-table">
+                        <!-- Sample data -->
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>Biology 101, Chemistry 101</td>
+                            <td>$100</td>
+                            <td>Delivered</td>
+                            <td>2023-10-01 10:00:00</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>Physics 101</td>
+                            <td>$50</td>
+                            <td>Pending</td>
+                            <td>2023-10-02 11:00:00</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <!-- Manage Courses -->
-            <section id="manage-courses" class="mb-5">
+            <div id="manage-courses" class="section hidden">
                 <h2>Manage Courses</h2>
-                <!-- Add/Edit/Delete forms here (simplified; expand with modals) -->
-                <button class="btn btn-primary">Add Course</button>
+                <button class="btn btn-primary mb-3" onclick="addCourse()">Add Course</button>
                 <table class="table table-striped">
-                    <thead><tr><th>ID</th><th>Title</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <?php
-                        $courses = $conn->query("SELECT * FROM courses");
-                        while ($course = $courses->fetch_assoc()) {
-                            echo "<tr><td>{$course['id']}</td><td>{$course['title']}</td><td><a href='edit_course.php?id={$course['id']}'>Edit</a> | <a href='delete.php?type=course&id={$course['id']}'>Delete</a></td></tr>";
-                        }
-                        ?>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="courses-table">
+                        <!-- Sample data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Biology 101</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" onclick="editCourse(1)">Edit</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteCourse(1)">Delete</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-            </section>
+            </div>
 
-            <!-- Manage Categories (similar to courses) -->
-            <section id="manage-categories" class="mb-5">
+            <!-- Manage Categories -->
+            <div id="manage-categories" class="section hidden">
                 <h2>Manage Categories</h2>
-                <button class="btn btn-primary">Add Category</button>
+                <button class="btn btn-primary mb-3" onclick="addCategory()">Add Category</button>
                 <table class="table table-striped">
-                    <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <?php
-                        $categories = $conn->query("SELECT * FROM categories");
-                        while ($cat = $categories->fetch_assoc()) {
-                            echo "<tr><td>{$cat['id']}</td><td>{$cat['name']}</td><td><a href='edit_category.php?id={$cat['id']}'>Edit</a> | <a href='delete.php?type=category&id={$cat['id']}'>Delete</a></td></tr>";
-                        }
-                        ?>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categories-table">
+                        <!-- Sample data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Science</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" onclick="editCategory(1)">Edit</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteCategory(1)">Delete</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-            </section>
+            </div>
 
-            <!-- Manage Orders -->
-            <section id="manage-orders" class="mb-5">
-                <h2>Manage Orders</h2>
+            <!-- Manage Payments -->
+            <div id="manage-payments" class="section hidden">
+                <h2>Manage Payments</h2>
                 <table class="table table-striped">
-                    <thead><tr><th>ID</th><th>User</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <?php
-                        $orders = $conn->query("SELECT t.id, u.username, t.order_status FROM transactions t LEFT JOIN users u ON t.user_id = u.id");
-                        while ($order = $orders->fetch_assoc()) {
-                            echo "<tr><td>{$order['id']}</td><td>{$order['username'] ?: 'Guest'}</td><td>{$order['order_status']}</td><td><a href='update_status.php?id={$order['id']}&status=delivered'>Mark Delivered</a></td></tr>";
-                        }
-                        ?>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>User Name</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payments-table">
+                        <!-- Sample data -->
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>$100</td>
+                            <td>Delivered</td>
+                            <td>
+                                <select onchange="updatePaymentStatus(1, this.value)">
+                                    <option value="pending">Pending</option>
+                                    <option value="delivered" selected>Delivered</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>$50</td>
+                            <td>Pending</td>
+                            <td>
+                                <select onchange="updatePaymentStatus(2, this.value)">
+                                    <option value="pending" selected>Pending</option>
+                                    <option value="delivered">Delivered</option>
+                                </select>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-            </section>
+            </div>
 
             <!-- Manage Users -->
-            <section id="manage-users" class="mb-5">
+            <div id="manage-users" class="section hidden">
                 <h2>Manage Users</h2>
                 <table class="table table-striped">
-                    <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <?php
-                        $users = $conn->query("SELECT * FROM users WHERE role != 'admin'");
-                        while ($user = $users->fetch_assoc()) {
-                            echo "<tr><td>{$user['id']}</td><td>{$user['username']}</td><td>{$user['email']}</td><td><a href='delete.php?type=user&id={$user['id']}'>Delete</a></td></tr>";
-                        }
-                        ?>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table">
+                        <!-- Sample data -->
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>john@example.com</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser(1)">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>jane@example.com</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser(2)">Delete</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-            </section>
-
-            <!-- View Transactions -->
-            <section id="view-transactions" class="mb-5">
-                <h2>View Transactions</h2>
-                <table class="table table-striped">
-                    <thead><tr><th>Transaction ID</th><th>User</th><th>Payer Email</th><th>Courses Purchased</th><th>Total Amount</th><th>Order Status</th><th>Purchase Timestamp</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <?php while ($trans = $transactions->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo $trans['id']; ?></td>
-                                <td><?php echo $trans['username'] ?: 'Guest'; ?></td>
-                                <td><?php echo $trans['payer_email']; ?></td>
-                                <td><?php echo $trans['courses_purchased']; ?></td>
-                                <td><?php echo $trans['total_amount']; ?></td>
-                                <td><?php echo $trans['order_status']; ?></td>
-                                <td><?php echo $trans['purchase_timestamp']; ?></td>
-                                <td>
-                                    <?php if ($trans['order_status'] == 'pending'): ?>
-                                        <form method="POST" style="display:inline;">
-                                            <input type="hidden" name="order_id" value="<?php echo $trans['id']; ?>">
-                                            <button type="submit" name="confirm_order" class="btn btn-success btn-sm">Confirm</button>
-                                        </form>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </section>
+            </div>
         </div>
     </div>
 
+    <!-- MDBootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <script>
-        // Sales Chart
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: <?php echo json_encode($sales_labels); ?>,
-                datasets: [{
-                    label: 'Sales',
-                    data: <?php echo json_encode($sales_values); ?>,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }]
+        // Sample data
+        let users = [
+            { id: 1, name: 'John Doe', email: 'john@example.com' },
+            { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+        ];
+        let courses = [
+            { id: 1, name: 'Biology 101' }
+        ];
+        let categories = [
+            { id: 1, name: 'Science' }
+        ];
+        let transactions = [
+            { id: 1, user: 'John Doe', courses: 'Biology 101, Chemistry 101', amount: 100, status: 'Delivered', timestamp: '2023-10-01 10:00:00' },
+            { id: 2, user: 'Jane Smith', courses: 'Physics 101', amount: 50, status: 'Pending', timestamp: '2023-10-02 11:00:00' }
+        ];
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-id').value;
+            const password = document.getElementById('admin-password').value;
+            if (id === 'fsbiology@83' && password === 'Genomics@83') {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+                showSection('dashboard');
+                updateDashboard();
+            } else {
+                alert('Invalid credentials');
             }
         });
+
+        // Logout
+        function logout() {
+            document.getElementById('admin-panel').classList.add('hidden');
+            document.getElementById('login-section').classList.remove('hidden');
+        }
+
+        // Show section
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Update dashboard
+        function updateDashboard() {
+            document.getElementById('total-users').textContent = users.length;
+            document.getElementById('total-courses').textContent = courses.length;
+            document.getElementById('total-orders').textContent = transactions.length;
+            const totalSales = transactions.reduce((sum, t) => sum + t.amount, 0);
+            document.getElementById('total-sales').textContent = '$' + totalSales;
+
+            // Chart
+            const ctx = document.getElementById('sales-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Sales',
+                        data: [100, 200, 150, 300, 250, totalSales],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    }]
+                }
+            });
+        }
+
+        // Manage Courses
+        function addCourse() {
+            const name = prompt('Enter course name:');
+            if (name) {
+                const id = courses.length + 1;
+                courses.push({ id, name });
+                updateCoursesTable();
+            }
+        }
+
+        function editCourse(id) {
+            const course = courses.find(c => c.id === id);
+            const newName = prompt('Edit course name:', course.name);
+            if (newName) {
+                course.name = newName;
+                updateCoursesTable();
+            }
+        }
+
+        function deleteCourse(id) {
+            courses = courses.filter(c => c.id !== id);
+            updateCoursesTable();
+        }
+
+        function updateCoursesTable() {
+            const tbody = document.getElementById('courses-table');
+            tbody.innerHTML = courses.map(c => `
+                <tr>
+                    <td>${c.id}</td>
+                    <td>${c.name}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="editCourse(${c.id})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteCourse(${c.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Manage Categories
+        function addCategory() {
+            const name = prompt('Enter category name:');
+            if (name) {
+                const id = categories.length + 1;
+                categories.push({ id, name });
+                updateCategoriesTable();
+            }
+        }
+
+        function editCategory(id) {
+            const category = categories.find(c => c.id === id);
+            const newName = prompt('Edit category name:', category.name);
+            if (newName) {
+                category.name = newName;
+                updateCategoriesTable();
+            }
+        }
+
+        function deleteCategory(id) {
+            categories = categories.filter(c => c.id !== id);
+            updateCategoriesTable();
+        }
+
+        function updateCategoriesTable() {
+            const tbody = document.getElementById('categories-table');
+            tbody.innerHTML = categories.map(c => `
+                <tr>
+                    <td>${c.id}</td>
+                    <td>${c.name}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="editCategory(${c.id})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteCategory(${c.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Manage Payments
+        function updatePaymentStatus(id, status) {
+            const transaction = transactions.find(t => t.id === id);
+            transaction.status = status;
+            alert('Status updated');
+        }
+
+        // Manage Users
+        function deleteUser(id) {
+            users = users.filter(u => u.id !== id);
+            updateUsersTable();
+        }
+
+        function updateUsersTable() {
+            const tbody = document.getElementById('users-table');
+            tbody.innerHTML = users.map(u => `
+                <tr>
+                    <td>${u.id}</td>
+                    <td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteUser(${u.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 </body>
 </html>
