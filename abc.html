@@ -1,74 +1,104 @@
 <?php
-require_once __DIR__ . '/../common/config.php';
+require_once 'common/header.php';
+require_once 'common/sidebar.php';
 
-// Handle logout
-if(isset($_GET['logout'])) {
-    unset($_SESSION['admin_id']);
-    header('Location: login.php');
-    exit;
-}
+// Get stats
+$totalUsers = $conn->query("SELECT COUNT(*) as cnt FROM users")->fetch_assoc()['cnt'];
+$totalCourses = $conn->query("SELECT COUNT(*) as cnt FROM courses")->fetch_assoc()['cnt'];
+$totalOrders = $conn->query("SELECT COUNT(*) as cnt FROM orders WHERE status = 'paid'")->fetch_assoc()['cnt'];
+$totalRevenue = $conn->query("SELECT SUM(amount) as total FROM orders WHERE status = 'paid'")->fetch_assoc()['total'] ?: 0;
 
-// Redirect if already logged in
-if(isAdminLoggedIn()) {
-    header('Location: index.php');
-    exit;
-}
-
-// Handle login
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = sanitize($_POST['username']);
-    $password = $_POST['password'];
-    
-    $stmt = $conn->prepare("SELECT id, password FROM admin WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if($result->num_rows === 1) {
-        $admin = $result->fetch_assoc();
-        if(password_verify($password, $admin['password'])) {
-            $_SESSION['admin_id'] = $admin['id'];
-            header('Location: index.php');
-            exit;
-        }
-    }
-    $error = 'Invalid username or password';
-}
+// Recent orders
+$recentOrders = $conn->query("SELECT o.*, u.name as user_name, c.title as course_title 
+    FROM orders o 
+    JOIN users u ON o.user_id = u.id 
+    JOIN courses c ON o.course_id = c.id 
+    ORDER BY o.created_at DESC LIMIT 5");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - <?php echo $appName; ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body class="bg-sky-600 min-h-screen flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <div class="text-center mb-8">
-            <div class="w-20 h-20 bg-sky-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <i class="fas fa-user-shield text-3xl text-sky-600"></i>
+
+<main class="p-4 space-y-4">
+    <h1 class="text-xl font-bold text-gray-800">Dashboard</h1>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-users text-blue-600 text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-800"><?php echo $totalUsers; ?></p>
+                    <p class="text-sm text-gray-500">Users</p>
+                </div>
             </div>
-            <h1 class="text-2xl font-bold text-gray-800">Admin Login</h1>
-            <p class="text-gray-500"><?php echo $appName; ?></p>
         </div>
-
-        <?php if(isset($error)): ?>
-        <div class="bg-red-100 text-red-600 p-3 rounded mb-4 text-sm"><?php echo $error; ?></div>
-        <?php endif; ?>
-
-        <form method="POST" class="space-y-4">
-            <div>
-                <label class="block text-gray-600 text-sm mb-1">Username</label>
-                <input type="text" name="username" required class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="Enter username">
+        
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-book text-green-600 text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-800"><?php echo $totalCourses; ?></p>
+                    <p class="text-sm text-gray-500">Courses</p>
+                </div>
             </div>
-            <div>
-                <label class="block text-gray-600 text-sm mb-1">Password</label>
-                <input type="password" name="password" required class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="Enter password">
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-shopping-cart text-purple-600 text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-800"><?php echo $totalOrders; ?></p>
+                    <p class="text-sm text-gray-500">Orders</p>
+                </div>
             </div>
-            <button type="submit" class="w-full bg-sky-600 text-white py-3 rounded-lg font-semibold">Login</button>
-        </form>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-rupee-sign text-yellow-600 text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-800">₹<?php echo number_format($totalRevenue); ?></p>
+                    <p class="text-sm text-gray-500">Revenue</p>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+    <!-- Recent Orders -->
+    <div class="bg-white rounded-lg shadow">
+        <div class="flex items-center justify-between p-4 border-b">
+            <h2 class="font-semibold text-gray-800">Recent Orders</h2>
+            <a href="orders.php" class="text-sky-600 text-sm">View All</a>
+        </div>
+        <div class="divide-y">
+            <?php if($recentOrders->num_rows === 0): ?>
+            <p class="p-4 text-gray-500 text-center">No orders yet</p>
+            <?php else: ?>
+            <?php while($order = $recentOrders->fetch_assoc()): ?>
+            <div class="p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-medium text-gray-800"><?php echo sanitize($order['user_name']); ?></h3>
+                        <p class="text-sm text-gray-500"><?php echo sanitize($order['course_title']); ?></p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold text-gray-800">₹<?php echo number_format($order['amount']); ?></p>
+                        <span class="text-xs px-2 py-1 rounded <?php echo $order['status'] === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'; ?>">
+                            <?php echo ucfirst($order['status']); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <?php endwhile; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</main>
+
+<?php require_once 'common/bottom.php'; ?>
