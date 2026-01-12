@@ -34,20 +34,14 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .hero-image-container {
+        .hero-image {
             flex: 1;
             min-width: 300px;
+            /* IMAGE OPTION 1: Background URL */
+            background: #f0f0f0 url('PASTE_YOUR_IMAGE_LINK_HERE') no-repeat center center;
+            background-size: cover;
             position: relative;
             min-height: 400px;
-            background: #eee;
-        }
-
-        /* BANNER IMAGE OPTION: Set your image URL here */
-        .hero-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
 
         .badge {
@@ -58,7 +52,6 @@
             color: white;
             padding: 10px 25px;
             font-weight: bold;
-            z-index: 10;
             clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
         }
 
@@ -152,52 +145,51 @@
 <body>
 
     <header class="hero-banner">
-        <div class="hero-image-container">
-            <div class="badge">Offline + Online [cite: 1]</div>
-            <img src="https://via.placeholder.com/600x800?text=Insert+Nursing+Banner+Image+Link+Here" alt="Nursing Admission 2026">
-        </div>
+        <div class="hero-image">
+            [cite_start]<div class="badge">Offline + Online [cite: 1]</div>
+            </div>
         <div class="hero-content">
-            <h1 class="main-title">NURSING [cite: 2]</h1>
-            <div><span class="course-highlight">ANM/GNM [cite: 3]</span></div>
-            <div class="admission-tag">ADMISSION OPEN [cite: 4]</div>
+            [cite_start]<h1 class="main-title">NURSING [cite: 2]</h1>
+            [cite_start]<div><span class="course-highlight">ANM/GNM [cite: 3]</span></div>
+            [cite_start]<div class="admission-tag">ADMISSION OPEN [cite: 4]</div>
             
             <div class="date-box">
-                <strong>Starts On:</strong> 11 March, 2026 [cite: 5, 25]
+                [cite_start]<strong>Starts On:</strong> 11 March, 2026 [cite: 5]
             </div>
 
-            <p><em>"Crack the WB Nursing Entrance with Top Mentors" [cite: 9]</em></p>
+            [cite_start]<p><em>"Crack the WB Nursing Entrance with Top Mentors" [cite: 9]</em></p>
             
             <div class="cta-container">
-                <a href="tel:7001730930" class="btn btn-call">CALL NOW: 7001730930 [cite: 6, 7]</a>
-                <a href="YOUR_LINK_HERE" class="btn btn-click">CONTACT NOW: CLICK HERE [cite: 8]</a>
+                [cite_start]<a href="tel:7001730930" class="btn btn-call">CALL NOW: 7001730930 [cite: 6, 7]</a>
+                [cite_start]<a href="PASTE_YOUR_CONTACT_LINK_HERE" class="btn btn-click">CONTACT NOW: CLICK HERE [cite: 8]</a>
             </div>
         </div>
     </header>
 
     <main class="features-section">
-        <h2>Batch Features [cite: 13]</h2>
-        <p>Specialized Bengali coaching for WBJEEB(ANM-GNM) entrance[cite: 10, 19].</p>
+        [cite_start]<h2>Batch Features [cite: 13]</h2>
+        [cite_start]<p>Specialized Bengali coaching for WBJEEB(ANM-GNM) entrance[cite: 10, 19].</p>
         
         <div class="features-grid">
             <div class="feature-card">
-                <strong>Mode of Study:</strong> Offline + online and recorded lectures[cite: 14, 21].
+                [cite_start]<strong>Mode of Study:</strong> Offline + online and recorded lectures[cite: 14, 21].
             </div>
             <div class="feature-card">
-                <strong>Duration:</strong> 1 hour 15 mins per lecture [cite: 22] over a 9-month plan[cite: 15].
+                [cite_start]<strong>Duration:</strong> 1 hour 15 mins per lecture [cite: 22] [cite_start]over a 9-month plan[cite: 15].
             </div>
             <div class="feature-card">
-                <strong>Syllabus:</strong> Covers Life Science, Physical Science, Mathematics, Basic English, GK & Logical Reasoning.
+                [cite_start]<strong>Syllabus:</strong> Covers Life Science, Physical Science, Mathematics, Basic English, GK & Logical Reasoning[cite: 20].
             </div>
             <div class="feature-card">
-                <strong>Materials:</strong> Chapter-wise PDF study materials via "1st Step Biology" app[cite: 17, 24].
+                [cite_start]<strong>Materials:</strong> Chapter-wise PDF study materials via "1st Step Biology" app[cite: 17, 24].
             </div>
             <div class="feature-card">
-                <strong>Assessment:</strong> Subjective tests with solutions and Mock tests with expert analysis[cite: 16, 23].
+                [cite_start]<strong>Assessment:</strong> Subjective tests [cite: 16] [cite_start]and Mock tests with expert analysis[cite: 23].
             </div>
         </div>
         
         <p style="text-align: center; margin-top: 30px;">
-            <strong>[Free Demo Class in Bengali Available] [cite: 12]</strong>
+            [cite_start]<strong>[Free Demo Class in Bengali Available] [cite: 12]</strong>
         </p>
     </main>
 
