@@ -3,65 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursing Admission 2026</title>
+    <title>Nursing Admission 2026 - ANM/GNM</title>
     <style>
         :root {
-            --primary-red: #d32f2f;
-            --accent-purple: #8e24aa;
-            --yellow-bg: #fff176;
-            --dark-text: #333;
-            --white: #ffffff;
+            --primary-red: #e63946;
+            --secondary-purple: #6a0572;
+            --accent-yellow: #ffea00;
+            --text-dark: #1d3557;
+            --bg-light: #f1faee;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        .banner-container {
+        /* Banner Hero Section */
+        .hero-banner {
             display: flex;
             flex-wrap: wrap;
-            max-width: 1100px;
+            background: white;
+            max-width: 1200px;
             margin: 20px auto;
-            background: var(--white);
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        /* Image Section */
-        .banner-image {
+        .hero-image {
             flex: 1;
             min-width: 300px;
-            background: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #f0f0f0 url('YOUR_IMAGE_LINK_HERE') no-repeat center center;
+            background-size: cover;
             position: relative;
+            min-height: 400px;
         }
 
-        .banner-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .badge-overlay {
+        .badge {
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 0;
-            background: var(--accent-purple);
+            background: var(--secondary-purple);
             color: white;
-            padding: 5px 20px;
+            padding: 10px 25px;
             font-weight: bold;
-            clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
         }
 
-        /* Content Section */
-        .banner-content {
+        .hero-content {
             flex: 1.2;
             padding: 40px;
             display: flex;
@@ -69,146 +62,135 @@
             justify-content: center;
         }
 
-        .title-nursing {
+        .main-title {
             color: var(--primary-red);
-            font-size: 3rem;
-            font-weight: 900;
+            font-size: 3.5rem;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -1px;
         }
 
-        .course-tag {
-            background-color: var(--yellow-bg);
-            color: #000;
+        .course-highlight {
+            background: var(--accent-yellow);
+            color: black;
             display: inline-block;
-            padding: 5px 15px;
+            padding: 5px 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            border: 2px solid black;
+            margin: 10px 0;
+        }
+
+        .admission-tag {
+            color: var(--secondary-purple);
             font-size: 1.8rem;
             font-weight: bold;
-            margin: 10px 0;
-            border: 2px solid #000;
-        }
-
-        .admission-status {
-            color: var(--accent-purple);
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
             margin-bottom: 20px;
         }
 
-        .start-date-box {
-            border: 2px dashed #4caf50;
-            padding: 15px;
-            display: inline-block;
-            margin-bottom: 25px;
-        }
-
-        .start-date-box span {
-            display: block;
-            color: #2e7d32;
-            font-weight: bold;
-        }
-
-        .date-text {
-            font-size: 1.4rem;
+        .date-box {
+            border: 2px solid #2d6a4f;
+            padding: 10px;
+            width: fit-content;
+            margin-bottom: 20px;
         }
 
         /* CTA Buttons */
-        .cta-group {
+        .cta-container {
             display: flex;
             gap: 15px;
-            align-items: center;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
-        .btn-call {
-            background-color: var(--primary-red);
-            color: white;
-            padding: 12px 25px;
+        .btn {
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
+            text-align: center;
+            transition: transform 0.2s;
         }
 
-        .btn-click-here {
-            background-color: #25d366; /* WhatsApp Green */
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
+        .btn-call { background: var(--primary-red); color: white; }
+        .btn-click { background: #25d366; color: white; }
+        .btn:hover { transform: scale(1.05); }
+
+        /* Features Section */
+        .features-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        .btn-call:hover, .btn-click-here:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .phone-number {
-            display: block;
-            margin-top: 10px;
-            font-size: 1.5rem;
-            color: var(--primary-red);
-            font-weight: bold;
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-left: 5px solid var(--secondary-purple);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .banner-container {
-                flex-direction: column;
-                margin: 10px;
-            }
-            .banner-content {
-                padding: 25px;
-                text-align: center;
-            }
-            .cta-group {
-                flex-direction: column;
-            }
+            .hero-banner { flex-direction: column; }
+            .main-title { font-size: 2.5rem; }
+            .cta-container { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-<section class="banner-container">
-    <div class="banner-image">
-        <div class="badge-overlay">Offline + Online [cite: 1]</div>
-        <img src="https://via.placeholder.com/500x600?text=Nursing+Professional+Image" alt="Nursing Admission">
-    </div>
-
-    <div class="banner-content">
-        <h1 class="title-nursing">NURSING [cite: 2]</h1>
-        <div>
-            <span class="course-tag">ANM/GNM [cite: 3]</span>
+    <header class="hero-banner">
+        <div class="hero-image">
+            <div class="badge">Offline + Online [cite: 1]</div>
         </div>
-        <div class="admission-status">ADMISSION OPEN [cite: 4]</div>
+        <div class="hero-content">
+            <h1 class="main-title">NURSING [cite: 2]</h1>
+            <div><span class="course-highlight">ANM/GNM [cite: 3]</span></div>
+            <div class="admission-tag">ADMISSION OPEN [cite: 4]</div>
+            
+            <div class="date-box">
+                <strong>Starts On:</strong> 11 March, 2026 [cite: 5]
+            </div>
 
-        <div class="start-date-box">
-            <span>Starts On [cite: 5]</span>
-            <strong class="date-text">11 March, 2026 [cite: 5]</strong>
+            <p><em>"Crack the WB Nursing Entrance with Top Mentors" [cite: 9]</em></p>
+            
+            <div class="cta-container">
+                <a href="tel:7001730930" class="btn btn-call">CALL NOW: 7001730930 [cite: 6, 7]</a>
+                <a href="#" class="btn btn-click">CONTACT NOW: CLICK HERE [cite: 8]</a>
+            </div>
         </div>
+    </header>
 
-        <p style="font-style: italic; color: #555;">
-            "Crack the WB Nursing Entrance with Top Mentors" [cite: 9]
-        </p>
-
-        <div class="cta-group">
-            <a href="tel:7001730930" class="btn-call">CALL NOW [cite: 6]</a>
-            <a href="#" class="btn-click-here">CONTACT NOW: CLICK HERE [cite: 8]</a>
+    <main class="features-section">
+        <h2>Batch Features [cite: 13]</h2>
+        <p>Specialized Bengali coaching for WBJEEB(ANM-GNM) entrance[cite: 10, 19].</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <strong>Mode of Study:</strong> Offline + online and recorded lectures[cite: 14, 21].
+            </div>
+            <div class="feature-card">
+                <strong>Duration:</strong> 1 hour 15 mins per lecture [cite: 22] over a 9-month plan[cite: 15].
+            </div>
+            <div class="feature-card">
+                <strong>Syllabus:</strong> Covers Life Science, Physical Science, Math, English, GK & Reasoning.
+            </div>
+            <div class="feature-card">
+                <strong>Materials:</strong> Chapter-wise PDF study materials via "1st Step Biology" app[cite: 17, 24].
+            </div>
+            <div class="feature-card">
+                <strong>Assessment:</strong> Subjective tests and Mock tests with expert analysis[cite: 16, 23].
+            </div>
         </div>
         
-        <span class="phone-number">7001730930 [cite: 7]</span>
-
-        <p style="font-size: 0.9rem; color: #666; margin-top: 20px;">
-            [Free Demo Class in Bengali] [cite: 12]
+        <p style="text-align: center; margin-top: 30px;">
+            <strong>[Free Demo Class in Bengali Available] [cite: 12]</strong>
         </p>
-    </div>
-</section>
+    </main>
 
 </body>
 </html>
