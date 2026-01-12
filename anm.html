@@ -3,130 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursing Admission 2026</title>
+    <title>Nursing Admission 2026 - ANM/GNM</title>
     <style>
         :root {
-            --primary-red: #d32f2f;
-            --secondary-purple: #8e24aa;
-            --accent-yellow: #ffeb3b;
-            --green-cta: #2e7d32;
+            --primary-red: #e63946;
+            --secondary-purple: #6a0572;
+            --accent-yellow: #ffea00;
+            --text-dark: #1d3557;
+            --bg-light: #f1faee;
         }
 
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-        
-        .banner-card {
-            max-width: 900px;
-            margin: 30px auto;
-            background: white;
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Banner Hero Section */
+        .hero-banner {
             display: flex;
             flex-wrap: wrap;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            background: white;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        /* BANNER IMAGE OPTION SECTION */
-        .image-section {
+        .hero-image {
             flex: 1;
-            min-width: 350px;
+            min-width: 300px;
+            background: #f0f0f0 url('YOUR_IMAGE_LINK_HERE') no-repeat center center;
+            background-size: cover;
             position: relative;
-            background: #eee;
+            min-height: 400px;
         }
 
-        .image-section img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .mode-badge {
+        .badge {
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 0;
             background: var(--secondary-purple);
             color: white;
-            padding: 5px 15px;
+            padding: 10px 25px;
             font-weight: bold;
-            font-size: 0.9rem;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
         }
 
-        .content-section {
-            flex: 1;
-            padding: 30px;
+        .hero-content {
+            flex: 1.2;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        h1 { color: var(--primary-red); font-size: 3rem; margin: 0; line-height: 1; }
-        
-        .tagline {
+        .main-title {
+            color: var(--primary-red);
+            font-size: 3.5rem;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .course-highlight {
             background: var(--accent-yellow);
-            padding: 5px 10px;
+            color: black;
             display: inline-block;
+            padding: 5px 20px;
+            font-size: 2rem;
             font-weight: bold;
-            font-size: 1.5rem;
+            border: 2px solid black;
             margin: 10px 0;
-            border: 1px solid #000;
         }
 
-        .admission-text { color: var(--secondary-purple); font-weight: bold; font-size: 1.2rem; margin-bottom: 20px; }
-        
-        .date-container { border: 2px solid var(--green-cta); padding: 10px; margin-bottom: 20px; }
-        .date-container span { color: var(--green-cta); font-weight: bold; font-size: 1.3rem; }
-
-        /* CTA BUTTONS */
-        .cta-button {
-            background: var(--green-cta);
-            color: white;
-            text-align: center;
-            padding: 15px;
-            text-decoration: none;
+        .admission-tag {
+            color: var(--secondary-purple);
+            font-size: 1.8rem;
             font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            display: block;
-            transition: 0.3s;
+            margin-bottom: 20px;
         }
 
-        .cta-call { background: var(--primary-red); }
-        .cta-button:hover { opacity: 0.9; }
+        .date-box {
+            border: 2px solid #2d6a4f;
+            padding: 10px;
+            width: fit-content;
+            margin-bottom: 20px;
+        }
 
-        .phone-display { font-size: 1.5rem; color: var(--primary-red); font-weight: bold; text-align: center; }
+        /* CTA Buttons */
+        .cta-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-        @media (max-width: 600px) {
-            .banner-card { flex-direction: column; }
-            .image-section { min-width: 100%; height: 300px; }
+        .btn {
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .btn-call { background: var(--primary-red); color: white; }
+        .btn-click { background: #25d366; color: white; }
+        .btn:hover { transform: scale(1.05); }
+
+        /* Features Section */
+        .features-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-left: 5px solid var(--secondary-purple);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner { flex-direction: column; }
+            .main-title { font-size: 2.5rem; }
+            .cta-container { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-<div class="banner-card">
-    <div class="image-section">
-        <div class="mode-badge">Offline + Online</div> 
-        <img src="https://via.placeholder.com/500x600?text=Nursing+Banner+Image" alt="Nursing Admission 2026">
-    </div>
-
-    <div class="content-section">
-        <h1>NURSING</h1> [cite: 2]
-        <div><span class="tagline">ANM/GNM</span></div> [cite: 3]
-        <div class="admission-text">ADMISSION OPEN</div> [cite: 4]
-        
-        <div class="date-container">
-            Starts On: <br>
-            <span>11 March, 2026</span> 
+    <header class="hero-banner">
+        <div class="hero-image">
+            <div class="badge">Offline + Online [cite: 1]</div>
         </div>
+        <div class="hero-content">
+            <h1 class="main-title">NURSING [cite: 2]</h1>
+            <div><span class="course-highlight">ANM/GNM [cite: 3]</span></div>
+            <div class="admission-tag">ADMISSION OPEN [cite: 4]</div>
+            
+            <div class="date-box">
+                <strong>Starts On:</strong> 11 March, 2026 [cite: 5]
+            </div>
 
-        <p><em>"Crack the WB Nursing Entrance with Top Mentors"</em></p> [cite: 9]
+            <p><em>"Crack the WB Nursing Entrance with Top Mentors" [cite: 9]</em></p>
+            
+            <div class="cta-container">
+                <a href="tel:7001730930" class="btn btn-call">CALL NOW: 7001730930 [cite: 6, 7]</a>
+                <a href="#" class="btn btn-click">CONTACT NOW: CLICK HERE [cite: 8]</a>
+            </div>
+        </div>
+    </header>
 
-        <a href="tel:7001730930" class="cta-button cta-call">CALL NOW</a> [cite: 6]
-        <a href="#" class="cta-button">CONTACT NOW: CLICK HERE</a> [cite: 8]
+    <main class="features-section">
+        <h2>Batch Features [cite: 13]</h2>
+        <p>Specialized Bengali coaching for WBJEEB(ANM-GNM) entrance[cite: 10, 19].</p>
         
-        <div class="phone-display">7001730930</div> [cite: 7]
-    </div>
-</div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <strong>Mode of Study:</strong> Offline + online and recorded lectures[cite: 14, 21].
+            </div>
+            <div class="feature-card">
+                <strong>Duration:</strong> 1 hour 15 mins per lecture [cite: 22] over a 9-month plan[cite: 15].
+            </div>
+            <div class="feature-card">
+                <strong>Syllabus:</strong> Covers Life Science, Physical Science, Math, English, GK & Reasoning.
+            </div>
+            <div class="feature-card">
+                <strong>Materials:</strong> Chapter-wise PDF study materials via "1st Step Biology" app[cite: 17, 24].
+            </div>
+            <div class="feature-card">
+                <strong>Assessment:</strong> Subjective tests and Mock tests with expert analysis[cite: 16, 23].
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 30px;">
+            <strong>[Free Demo Class in Bengali Available] [cite: 12]</strong>
+        </p>
+    </main>
 
 </body>
 </html>
