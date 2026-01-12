@@ -3,195 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursing Admission 2026 - ANM/GNM</title>
+    <title>Nursing Admission 2026 - 1st Step Biology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-red: #e63946;
-            --secondary-purple: #6a0572;
-            --accent-yellow: #ffea00;
-            --text-dark: #1d3557;
-            --bg-light: #f1faee;
+            --primary-red: #d32f2f;
+            --primary-blue: #1976d2;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --dark-text: #333333;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
             margin: 0;
             padding: 0;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* Banner Hero Section */
-        .hero-banner {
-            display: flex;
-            flex-wrap: wrap;
-            background: white;
-            max-width: 1200px;
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .hero-image {
-            flex: 1;
-            min-width: 300px;
-            /* IMAGE OPTION 1: Background URL */
-            background: #f0f0f0 url('PASTE_YOUR_IMAGE_LINK_HERE') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            min-height: 400px;
-        }
-
-        .badge {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: var(--secondary-purple);
-            color: white;
-            padding: 10px 25px;
-            font-weight: bold;
-            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-        }
-
-        .hero-content {
-            flex: 1.2;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .main-title {
-            color: var(--primary-red);
-            font-size: 3.5rem;
-            margin: 0;
-            text-transform: uppercase;
-        }
-
-        .course-highlight {
-            background: var(--accent-yellow);
-            color: black;
-            display: inline-block;
-            padding: 5px 20px;
-            font-size: 2rem;
-            font-weight: bold;
-            border: 2px solid black;
-            margin: 10px 0;
-        }
-
-        .admission-tag {
-            color: var(--secondary-purple);
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .date-box {
-            border: 2px solid #2d6a4f;
-            padding: 10px;
-            width: fit-content;
-            margin-bottom: 20px;
-        }
-
-        /* CTA Buttons */
-        .cta-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
+        header {
+            background-color: var(--white);
             text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .btn-call { background: var(--primary-red); color: white; }
-        .btn-click { background: #25d366; color: white; }
-        .btn:hover { transform: scale(1.05); }
-
-        /* Features Section */
-        .features-section {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-card {
-            background: white;
             padding: 20px;
-            border-left: 5px solid var(--secondary-purple);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .banner-container {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 20px auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        @media (max-width: 768px) {
-            .hero-banner { flex-direction: column; }
-            .main-title { font-size: 2.5rem; }
-            .cta-container { flex-direction: column; }
+        h1 {
+            color: var(--primary-red);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        .highlight-box {
+            background-color: #fff9c4;
+            padding: 15px;
+            border-left: 5px solid #fbc02d;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: green;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        /* CTA STICKY FOOTER UI */
+        .cta-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .cta-button {
+            width: 45%;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        .call-btn {
+            background-color: #25d366; /* WhatsApp/Call Green */
+            color: white;
+        }
+
+        .app-btn {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .spacer {
+            height: 100px; /* Space for sticky footer */
         }
     </style>
 </head>
 <body>
 
-    <header class="hero-banner">
-        <div class="hero-image">
-            [cite_start]<div class="badge">Offline + Online [cite: 1]</div>
-            </div>
-        <div class="hero-content">
-            [cite_start]<h1 class="main-title">NURSING [cite: 2]</h1>
-            [cite_start]<div><span class="course-highlight">ANM/GNM [cite: 3]</span></div>
-            [cite_start]<div class="admission-tag">ADMISSION OPEN [cite: 4]</div>
-            
-            <div class="date-box">
-                [cite_start]<strong>Starts On:</strong> 11 March, 2026 [cite: 5]
-            </div>
+<header>
+    [cite_start]<h1>NURSING ADMISSION OPEN [cite: 2, 4]</h1>
+    [cite_start]<p>Offline + Online Coaching [cite: 1]</p>
+</header>
 
-            [cite_start]<p><em>"Crack the WB Nursing Entrance with Top Mentors" [cite: 9]</em></p>
-            
-            <div class="cta-container">
-                [cite_start]<a href="tel:7001730930" class="btn btn-call">CALL NOW: 7001730930 [cite: 6, 7]</a>
-                [cite_start]<a href="PASTE_YOUR_CONTACT_LINK_HERE" class="btn btn-click">CONTACT NOW: CLICK HERE [cite: 8]</a>
-            </div>
-        </div>
-    </header>
+<div class="banner-container">
+    <img src="banner-image-url.jpg" alt="Nursing ANM/GNM Admission Banner">
+</div>
 
-    <main class="features-section">
-        [cite_start]<h2>Batch Features [cite: 13]</h2>
-        [cite_start]<p>Specialized Bengali coaching for WBJEEB(ANM-GNM) entrance[cite: 10, 19].</p>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                [cite_start]<strong>Mode of Study:</strong> Offline + online and recorded lectures[cite: 14, 21].
-            </div>
-            <div class="feature-card">
-                [cite_start]<strong>Duration:</strong> 1 hour 15 mins per lecture [cite: 22] [cite_start]over a 9-month plan[cite: 15].
-            </div>
-            <div class="feature-card">
-                [cite_start]<strong>Syllabus:</strong> Covers Life Science, Physical Science, Mathematics, Basic English, GK & Logical Reasoning[cite: 20].
-            </div>
-            <div class="feature-card">
-                [cite_start]<strong>Materials:</strong> Chapter-wise PDF study materials via "1st Step Biology" app[cite: 17, 24].
-            </div>
-            <div class="feature-card">
-                [cite_start]<strong>Assessment:</strong> Subjective tests [cite: 16] [cite_start]and Mock tests with expert analysis[cite: 23].
-            </div>
-        </div>
-        
-        <p style="text-align: center; margin-top: 30px;">
-            [cite_start]<strong>[Free Demo Class in Bengali Available] [cite: 12]</strong>
-        </p>
-    </main>
+<div class="content-section">
+    <div class="highlight-box">
+        [cite_start]Crack the WB Nursing Entrance with Top Mentors [cite: 9]<br>
+        [cite_start]<strong>Starts On: 11 March, 2026</strong> [cite: 5, 25]
+    </div>
+
+    [cite_start]<p>[cite: 10] From JENPAS-UG (B.Sc Nursing) to ANM-GNM, we provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College.</p>
+    
+    [cite_start]<p><strong>[Free Demo Class in Bengali]</strong> [cite: 12]</p>
+
+    [cite_start]<h2>Batch Features [cite: 13]</h2>
+    <ul class="features-list">
+        [cite_start]<li>Offline + online and recorded lectures by top faculties [cite: 14]</li>
+        [cite_start]<li>Duration of the lectures: 1 hour 15 mins [cite: 22]</li>
+        [cite_start]<li>9 months subscription plans available [cite: 15]</li>
+        [cite_start]<li>Subjective Tests with Solution [cite: 16]</li>
+        [cite_start]<li>Mock tests with expert analysis [cite: 23]</li>
+        [cite_start]<li>Chapter wise Study material (PDF format) [cite: 17, 24]</li>
+        [cite_start]<li>Class notes uploaded on "1st Step Biology" app [cite: 24]</li>
+    </ul>
+
+    [cite_start]<h2>Syllabus Covered [cite: 20]</h2>
+    <p>We cover the complete syllabus for:</p>
+    <ul>
+        [cite_start]<li>Life Science [cite: 20]</li>
+        [cite_start]<li>Physical Science [cite: 20]</li>
+        [cite_start]<li>Mathematics [cite: 20]</li>
+        [cite_start]<li>Basic English [cite: 20]</li>
+        [cite_start]<li>GK & Logical Reasoning [cite: 20]</li>
+    </ul>
+
+    <blockquote>
+        [cite_start][cite: 19] This batch is completely based on WBJEEB (ANM-GNM) entrance exam only.
+    </blockquote>
+</div>
+
+<div class="spacer"></div>
+
+<div class="cta-container">
+    <a href="tel:7001730930" class="cta-button call-btn">
+        [cite_start]📞 CALL NOW [cite: 6]
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=your.app.link" class="cta-button app-btn">
+        📲 DOWNLOAD APP
+    </a>
+</div>
 
 </body>
 </html>
