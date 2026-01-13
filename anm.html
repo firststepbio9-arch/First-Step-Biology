@@ -3,138 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursing Admission - 1st Step Biology</title>
+    <title>Nursing Admission 2026</title>
     <style>
         :root {
-            --primary-red: #e63946;
-            --secondary-purple: #8338ec;
-            --accent-yellow: #ffee00;
-            --text-dark: #2d3436;
-            --bg-light: #f8f9fa;
+            --primary-red: #d90429;
+            --purple-main: #6a0572;
+            --yellow-accent: #f9dc5c;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #fff;
+            overflow: hidden;
         }
 
-        /* Banner Section */
-        .banner {
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('YOUR_IMAGE_URL_HERE');
-            background-size: cover;
-            padding: 40px 20px;
+        /* BANNER SECTION */
+        .banner-header {
+            background-color: #fff;
             text-align: center;
-            border-bottom: 5px solid var(--secondary-purple);
+            position: relative;
         }
 
-        .badge {
-            background-color: var(--secondary-purple);
+        .offline-tag {
+            background: #9d4edd;
             color: white;
             padding: 5px 20px;
+            font-weight: bold;
             display: inline-block;
             clip-path: polygon(100% 0%, 95% 50%, 100% 100%, 0% 100%, 0% 0%);
+            margin-top: 10px;
+        }
+
+        .main-title {
+            color: var(--primary-red);
+            font-size: 50px;
+            font-weight: 900;
+            margin: 5px 0;
+            -webkit-text-stroke: 1px #000;
+        }
+
+        .course-badge {
+            background: var(--yellow-accent);
+            color: #000;
+            font-size: 32px;
             font-weight: bold;
+            padding: 5px 30px;
+            display: inline-block;
+            border: 2px solid #000;
             margin-bottom: 10px;
         }
 
-        h1 {
-            color: var(--primary-red);
-            font-size: 3rem;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .course-tag {
-            background-color: var(--accent-yellow);
-            display: inline-block;
-            padding: 10px 30px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            border: 2px solid #000;
-            margin: 15px 0;
-        }
-
-        .admission-open {
-            color: #4a0e4e;
-            font-size: 1.8rem;
+        .admission-text {
+            color: var(--purple-main);
+            font-size: 28px;
             font-weight: bold;
             display: block;
         }
 
-        .start-date {
-            background: white;
-            border: 2px solid #eee;
+        /* MEDIA INSERTION SLOTS */
+        .media-container {
             padding: 15px;
-            margin: 20px auto;
-            max-width: 300px;
-            border-radius: 8px;
+            background: #f9f9f9;
         }
 
-        /* Media Insertion Slots */
-        .media-slot {
-            background: #f1f2f6;
-            border: 2px dashed #ccc;
+        .banner-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid #ddd;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* DETAILS SECTION */
+        .content {
             padding: 20px;
-            margin: 20px;
+        }
+
+        .start-date-box {
+            border: 2px solid #ddd;
             text-align: center;
-            color: #666;
+            padding: 15px;
+            margin: 15px 0;
         }
 
-        /* Main Content */
-        .content-body {
-            padding: 30px;
+        .date-text {
+            color: #2d6a4f;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .highlight-box {
-            background: #fff3f3;
-            border-left: 5px solid var(--primary-red);
-            padding: 20px;
-            margin-bottom: 25px;
+        .features-list {
+            padding-left: 20px;
+            line-height: 1.8;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        /* CTA Section */
-        .cta-bar {
+        /* CTA BUTTONS */
+        .cta-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 20px;
-            background: #fff;
+            gap: 10px;
             position: sticky;
             bottom: 0;
+            background: white;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         .btn {
-            text-decoration: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            text-align: center;
             flex: 1;
-            margin: 0 10px;
-            transition: transform 0.2s;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
         }
-
-        .btn:active { transform: scale(0.95); }
 
         .btn-call {
             background-color: var(--primary-red);
@@ -146,79 +153,68 @@
             color: white;
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .features-grid { grid-template-columns: 1fr; }
-            .cta-bar { flex-direction: column; gap: 10px; }
-            .btn { width: 100%; box-sizing: border-box; }
+        @media (max-width: 480px) {
+            .main-title { font-size: 35px; }
+            .course-badge { font-size: 24px; }
+            .cta-container { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="banner">
-        [cite_start]<div class="badge">Offline + Online [cite: 1]</div>
-        [cite_start]<h1>NURSING [cite: 2]</h1>
-        [cite_start]<div class="course-tag">ANM/GNM [cite: 3]</div>
-        [cite_start]<span class="admission-open">ADMISSION OPEN [cite: 4]</span>
-        
-        <div class="media-slot">
-            <strong>PASTE VIDEO EMBED CODE HERE</strong><br>
-            (Replaces banner background if needed)
+    <div class="banner-header">
+        <div class="offline-tag">Offline + Online [cite: 1]</div>
+        <h1 class="main-title">NURSING [cite: 2]</h1>
+        <div class="course-badge">ANM/GNM [cite: 3]</div>
+        <span class="admission-text">ADMISSION OPEN [cite: 4]</span>
+    </div>
+
+    <div class="media-container">
+        <div class="banner-image-container">
+            <img src="https://via.placeholder.com/600x400?text=Paste+Your+Banner+Image+Link+Here" alt="Nursing Mentors">
         </div>
 
-        <div class="start-date">
-            [cite_start]<strong>Starts On [cite: 5]</strong><br>
-            [cite_start]<span style="font-size: 1.4rem; color: green;">11 March, 2026 [cite: 5, 25]</span>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div class="content-body">
-        [cite_start]<h2 style="color: var(--secondary-purple);">Crack the WB Nursing Entrance with Top Mentors [cite: 9]</h2>
-        [cite_start]<p>From JENPAS-UG (B.Sc Nursing) to ANM-GNM, We provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College. [cite: 10]</p>
+    <div class="content">
+        <div class="start-date-box">
+            <strong>Starts On</strong><br>
+            <span class="date-text">11 March, 2026 [cite: 5, 25]</span>
+        </div>
+
+        <h2>Crack the WB Nursing Entrance with Top Mentors [cite: 9]</h2>
+        <p>From JENPAS-UG (B.Sc Nursing) to ANM-GNM, We provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College[cite: 10].</p>
         
-        <div class="highlight-box">
-            [cite_start]<strong>Free Demo Class in Bengali [cite: 12]</strong><br>
-            [cite_start]Start your journey from student to healthcare professional today. [cite: 11]
-        </div>
+        <p><strong>[Free Demo Class in Bengali] [cite: 12]</strong></p>
 
-        <div class="media-slot">
-            <strong>PASTE IMAGE LINK HERE</strong><br>
-            (For additional campus or faculty photos)
-        </div>
-
-        [cite_start]<h3>Batch Features [cite: 13]</h3>
-        <ul>
-            [cite_start]<li>Offline + online and recorded lectures by top faculties [cite: 14, 21]</li>
-            [cite_start]<li>Duration of lectures: 1 hour 15 mins [cite: 22]</li>
-            [cite_start]<li>9-month subscription plans available [cite: 15]</li>
-            [cite_start]<li>Subjective Tests with Solutions [cite: 16]</li>
-            [cite_start]<li>Mock tests with expert analysis [cite: 23]</li>
-            [cite_start]<li>Chapter-wise Study material (PDF format) [cite: 17, 24]</li>
-            [cite_start]<li>Notes uploaded on "1st Step Biology" app [cite: 24]</li>
+        <h3>Batch Features [cite: 13]</h3>
+        <ul class="features-list">
+            <li>Offline + online and recorded lectures by top faculties [cite: 14, 21]</li>
+            <li>Subscription plans available: 9 months [cite: 15]</li>
+            <li>Subjective Tests with Solution [cite: 16]</li>
+            <li>Chapter wise Study material (PDF format) [cite: 17]</li>
+            <li>Duration of the lectures will be 1 hour 15 mins [cite: 22]</li>
+            <li>Mock tests with expert analysis [cite: 23]</li>
+            <li>PDF notes of each class will be uploaded on "1st Step Biology" app [cite: 24]</li>
         </ul>
 
-        [cite_start]<p><em>* This batch is completely based on WBJEEB (ANM-GNM) entrance exam only. [cite: 19]</em></p>
-
-        [cite_start]<h3>Syllabus Coverage [cite: 20]</h3>
-        <div class="features-grid">
-            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Life Science</div>
-            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Physical Science</div>
-            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Mathematics</div>
-            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Basic English</div>
-            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• GK & Logical Reasoning</div>
-        </div>
+        <p><i>This batch is completely based on WBJEEB(ANM-GNM) entrance exam only[cite: 19].</i></p>
+        
+        <p><strong>Syllabus Covered:</strong> Life science, Physical science, Mathematics, Basic English, GK & Logical Reasoning[cite: 20].</p>
     </div>
 
-    <div class="cta-bar">
+    <div class="cta-container">
         <a href="tel:7001730930" class="btn btn-call">
-            [cite_start]CALL NOW [cite: 6]<br>
-            [cite_start]7001730930 [cite: 7]
+            CALL NOW <br>
+            7001730930 [cite: 7]
         </a>
-        <a href="PASTE_APP_STORE_LINK_HERE" class="btn btn-app">
+        <a href="https://play.google.com/store" class="btn btn-app">
             DOWNLOAD APP<br>
-            [cite_start]1st Step Biology [cite: 24]
+            1st Step Biology [cite: 24]
         </a>
     </div>
 </div>
