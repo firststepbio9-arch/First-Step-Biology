@@ -3,200 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursing Admission 2026 - 1st Step Biology</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://github.com/firststepbio9-arch/First-Step-Biology/blob/c801e1890cf4d325c69aca7884bc0d5d1d4f2674/DNA.jpg" rel="stylesheet">
+    <title>Nursing Admission - 1st Step Biology</title>
     <style>
         :root {
-            --primary-red: #d32f2f;
-            --primary-blue: #1976d2;
-            --light-bg: #f4f7f6;
-            --white: #ffffff;
-            --dark-text: #333333;
+            --primary-red: #e63946;
+            --secondary-purple: #8338ec;
+            --accent-yellow: #ffee00;
+            --text-dark: #2d3436;
+            --bg-light: #f8f9fa;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--dark-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        header {
-            background-color: var(--white);
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .banner-container {
-            max-width: 600px;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        .banner-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .content-section {
+        .container {
             max-width: 800px;
-            margin: 20px auto;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('YOUR_IMAGE_URL_HERE');
+            background-size: cover;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary-purple);
+        }
+
+        .badge {
+            background-color: var(--secondary-purple);
+            color: white;
+            padding: 5px 20px;
+            display: inline-block;
+            clip-path: polygon(100% 0%, 95% 50%, 100% 100%, 0% 100%, 0% 0%);
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
         h1 {
             color: var(--primary-red);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        h2 {
-            color: var(--primary-blue);
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 5px;
-            margin-top: 30px;
+        .course-tag {
+            background-color: var(--accent-yellow);
+            display: inline-block;
+            padding: 10px 30px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border: 2px solid #000;
+            margin: 15px 0;
+        }
+
+        .admission-open {
+            color: #4a0e4e;
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .start-date {
+            background: white;
+            border: 2px solid #eee;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 300px;
+            border-radius: 8px;
+        }
+
+        /* Media Insertion Slots */
+        .media-slot {
+            background: #f1f2f6;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Main Content */
+        .content-body {
+            padding: 30px;
         }
 
         .highlight-box {
-            background-color: #fff9c4;
-            padding: 15px;
-            border-left: 5px solid #fbc02d;
-            margin: 20px 0;
-            font-weight: bold;
+            background: #fff3f3;
+            border-left: 5px solid var(--primary-red);
+            padding: 20px;
+            margin-bottom: 25px;
         }
 
-        .features-list {
-            list-style: none;
-            padding: 0;
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .features-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+        /* CTA Section */
+        .cta-bar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-        }
-
-        .features-list li::before {
-            content: "✓";
-            color: green;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        /* CTA STICKY FOOTER UI */
-        .cta-container {
-            position: fixed;
+            padding: 20px;
+            background: #fff;
+            position: sticky;
             bottom: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            background: var(--white);
-            padding: 15px 0;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
         }
 
-        .cta-button {
-            width: 45%;
-            padding: 15px;
-            text-align: center;
+        .btn {
             text-decoration: none;
-            border-radius: 30px;
+            padding: 15px 25px;
+            border-radius: 50px;
             font-weight: bold;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
             transition: transform 0.2s;
         }
 
-        .cta-button:active {
-            transform: scale(0.95);
-        }
+        .btn:active { transform: scale(0.95); }
 
-        .call-btn {
-            background-color: #25d366; /* WhatsApp/Call Green */
+        .btn-call {
+            background-color: var(--primary-red);
             color: white;
         }
 
-        .app-btn {
-            background-color: var(--primary-blue);
+        .btn-app {
+            background-color: #000;
             color: white;
         }
 
-        .spacer {
-            height: 100px; /* Space for sticky footer */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .cta-bar { flex-direction: column; gap: 10px; }
+            .btn { width: 100%; box-sizing: border-box; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>NURSING ADMISSION OPEN</h1>
-    <p>Offline + Online Coaching</p>
-</header>
+<div class="container">
+    <div class="banner">
+        [cite_start]<div class="badge">Offline + Online [cite: 1]</div>
+        [cite_start]<h1>NURSING [cite: 2]</h1>
+        [cite_start]<div class="course-tag">ANM/GNM [cite: 3]</div>
+        [cite_start]<span class="admission-open">ADMISSION OPEN [cite: 4]</span>
+        
+        <div class="media-slot">
+            <strong>PASTE VIDEO EMBED CODE HERE</strong><br>
+            (Replaces banner background if needed)
+        </div>
 
-<div class="banner-container">
-    <img src="banner-image-url.jpg" alt="Nursing ANM/GNM Admission Banner">
-</div>
-
-<div class="content-section">
-    <div class="highlight-box">
-        [cite_start]Crack the WB Nursing Entrance with Top Mentors [cite: 9]<br>
-        [cite_start]<strong>Starts On: 11 March, 2026</strong> [cite: 5, 25]
+        <div class="start-date">
+            [cite_start]<strong>Starts On [cite: 5]</strong><br>
+            [cite_start]<span style="font-size: 1.4rem; color: green;">11 March, 2026 [cite: 5, 25]</span>
+        </div>
     </div>
 
-    [cite_start]<p>[cite: 10] From JENPAS-UG (B.Sc Nursing) to ANM-GNM, we provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College.</p>
-    
-    [cite_start]<p><strong>[Free Demo Class in Bengali]</strong> [cite: 12]</p>
+    <div class="content-body">
+        [cite_start]<h2 style="color: var(--secondary-purple);">Crack the WB Nursing Entrance with Top Mentors [cite: 9]</h2>
+        [cite_start]<p>From JENPAS-UG (B.Sc Nursing) to ANM-GNM, We provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College. [cite: 10]</p>
+        
+        <div class="highlight-box">
+            [cite_start]<strong>Free Demo Class in Bengali [cite: 12]</strong><br>
+            [cite_start]Start your journey from student to healthcare professional today. [cite: 11]
+        </div>
 
-    [cite_start]<h2>Batch Features [cite: 13]</h2>
-    <ul class="features-list">
-        [cite_start]<li>Offline + online and recorded lectures by top faculties [cite: 14]</li>
-        [cite_start]<li>Duration of the lectures: 1 hour 15 mins [cite: 22]</li>
-        [cite_start]<li>9 months subscription plans available [cite: 15]</li>
-        [cite_start]<li>Subjective Tests with Solution [cite: 16]</li>
-        [cite_start]<li>Mock tests with expert analysis [cite: 23]</li>
-        [cite_start]<li>Chapter wise Study material (PDF format) [cite: 17, 24]</li>
-        [cite_start]<li>Class notes uploaded on "1st Step Biology" app [cite: 24]</li>
-    </ul>
+        <div class="media-slot">
+            <strong>PASTE IMAGE LINK HERE</strong><br>
+            (For additional campus or faculty photos)
+        </div>
 
-    [cite_start]<h2>Syllabus Covered [cite: 20]</h2>
-    <p>We cover the complete syllabus for:</p>
-    <ul>
-        [cite_start]<li>Life Science [cite: 20]</li>
-        [cite_start]<li>Physical Science [cite: 20]</li>
-        [cite_start]<li>Mathematics [cite: 20]</li>
-        [cite_start]<li>Basic English [cite: 20]</li>
-        [cite_start]<li>GK & Logical Reasoning [cite: 20]</li>
-    </ul>
+        [cite_start]<h3>Batch Features [cite: 13]</h3>
+        <ul>
+            [cite_start]<li>Offline + online and recorded lectures by top faculties [cite: 14, 21]</li>
+            [cite_start]<li>Duration of lectures: 1 hour 15 mins [cite: 22]</li>
+            [cite_start]<li>9-month subscription plans available [cite: 15]</li>
+            [cite_start]<li>Subjective Tests with Solutions [cite: 16]</li>
+            [cite_start]<li>Mock tests with expert analysis [cite: 23]</li>
+            [cite_start]<li>Chapter-wise Study material (PDF format) [cite: 17, 24]</li>
+            [cite_start]<li>Notes uploaded on "1st Step Biology" app [cite: 24]</li>
+        </ul>
 
-    <blockquote>
-        [cite_start][cite: 19] This batch is completely based on WBJEEB (ANM-GNM) entrance exam only.
-    </blockquote>
-</div>
+        [cite_start]<p><em>* This batch is completely based on WBJEEB (ANM-GNM) entrance exam only. [cite: 19]</em></p>
 
-<div class="spacer"></div>
+        [cite_start]<h3>Syllabus Coverage [cite: 20]</h3>
+        <div class="features-grid">
+            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Life Science</div>
+            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Physical Science</div>
+            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Mathematics</div>
+            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• Basic English</div>
+            <div style="background: #eef2ff; padding: 10px; border-radius: 5px;">• GK & Logical Reasoning</div>
+        </div>
+    </div>
 
-<div class="cta-container">
-    <a href="tel:+917001730930" class="cta-button call-btn">
-        📞 CALL NOW
-    </a>
-    <a href="https://play.google.com/store/apps/details?id=your.app.link" class="cta-button app-btn">
-        📲 DOWNLOAD APP
-    </a>
+    <div class="cta-bar">
+        <a href="tel:7001730930" class="btn btn-call">
+            [cite_start]CALL NOW [cite: 6]<br>
+            [cite_start]7001730930 [cite: 7]
+        </a>
+        <a href="PASTE_APP_STORE_LINK_HERE" class="btn btn-app">
+            DOWNLOAD APP<br>
+            [cite_start]1st Step Biology [cite: 24]
+        </a>
+    </div>
 </div>
 
 </body>
