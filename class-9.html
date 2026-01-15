@@ -4,191 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nursing Admission 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-red: #d90429;
+            --purple-main: #6a0572;
+            --yellow-accent: #f9dc5c;
+        }
+
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
+            background-color: #f4f4f4;
             color: #333;
-            line-height: 1.6;
         }
-        header {
-            background-color: #d32f2f;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .banner {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-        }
-        .video-section {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            margin: 20px 0;
-        }
-        .video-section h2 {
-            color: #1976d2;
-            margin-bottom: 20px;
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
             overflow: hidden;
         }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+
+        /* BANNER SECTION */
+        .banner-header {
+            background-color: #fff;
+            text-align: center;
+            position: relative;
         }
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+
+        .offline-tag {
+            background: #9d4edd;
+            color: white;
+            padding: 5px 20px;
+            font-weight: bold;
+            display: inline-block;
+            clip-path: polygon(100% 0%, 95% 50%, 100% 100%, 0% 100%, 0% 0%);
+            margin-top: 10px;
         }
+
         .main-title {
+            color: var(--primary-red);
+            font-size: 50px;
+            font-weight: 900;
+            margin: 5px 0;
+            -webkit-text-stroke: 1px #000;
+        }
+
+        .course-badge {
+            background: var(--yellow-accent);
+            color: #000;
             font-size: 32px;
-            color: #d32f2f;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .batch-date {
-            font-size: 24px;
-            color: #1976d2;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .description {
-            font-size: 18px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .features, .syllabus {
-            margin-bottom: 30px;
-        }
-        .features h3, .syllabus h3 {
-            color: #d32f2f;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        .features ul, .syllabus ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        .features li, .syllabus li {
+            font-weight: bold;
+            padding: 5px 30px;
+            display: inline-block;
+            border: 2px solid #000;
             margin-bottom: 10px;
         }
-        .sticky-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+
+        .admission-text {
+            color: var(--purple-main);
+            font-size: 28px;
+            font-weight: bold;
+            display: block;
+        }
+
+        /* MEDIA INSERTION SLOTS */
+        .media-container {
+            padding: 15px;
+            background: #f9f9f9;
+        }
+
+        .banner-image-container img {
             width: 100%;
-            background-color: white;
-            border-top: 2px solid #ddd;
+            height: auto;
+            display: block;
+            border: 2px solid #ddd;
+        }
+
+        /* Fixed Video Styling */
+        .video-wrapper {
+            width: 100%;
+            margin-top: 15px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        /* DETAILS SECTION */
+        .content {
+            padding: 20px;
+        }
+
+        .start-date-box {
+            border: 2px solid #ddd;
+            text-align: center;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .date-text {
+            color: #2d6a4f;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .features-list {
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        /* CTA BUTTONS */
+        .cta-container {
             display: flex;
             justify-content: space-between;
-            padding: 10px 20px;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            gap: 10px;
+            position: sticky;
+            bottom: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
-        .sticky-footer button {
+
+        .btn {
             flex: 1;
-            margin: 0 5px;
             padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
             text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
         }
-        .call-now {
-            background-color: #4caf50; /* Green */
+
+        .btn-call {
+            background-color: var(--primary-red);
             color: white;
         }
-        .download-app {
-            background-color: #1976d2; /* Blue */
+
+        .btn-app {
+            background-color: #000;
             color: white;
         }
-        @media (max-width: 768px) {
-            header {
-                font-size: 20px;
-                padding: 15px;
-            }
-            .main-title {
-                font-size: 28px;
-            }
-            .batch-date {
-                font-size: 20px;
-            }
-            .description {
-                font-size: 16px;
-            }
-            .sticky-footer button {
-                font-size: 16px;
-                padding: 12px;
-            }
+
+        @media (max-width: 480px) {
+            .main-title { font-size: 35px; }
+            .course-badge { font-size: 24px; }
+            .cta-container { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <header>
-        Offline + Online Nursing Admission Open
-    </header>
-    
-    <img src="https://github.com/firststepbio9-arch/First-Step-Biology/blob/c801e1890cf4d325c69aca7884bc0d5d1d4f2674/DNA.jpg" alt="Nursing Admission Banner" class="banner">
-    
-    <section class="video-section">
-        <h2>Free Demo Class</h2>
-        <div class="video-container">
-            <iframe src="https://youtu.be/YyepU5ztLf4?si=Q2RkHjbaJHx4oMXw" frameborder="0" allowfullscreen></iframe>
+
+<div class="container">
+    <div class="banner-header">
+        <div class="offline-tag">Offline + Online </div>
+        <h1 class="main-title">NURSING </h1>
+        <div class="course-badge">ANM/GNM</div>
+        <span class="admission-text">ADMISSION OPEN</span>
+    </div>
+
+    <div class="media-container">
+        <div class="banner-image-container">
+            <img src="https://github.com/firststepbio9-arch/First-Step-Biology/blob/main/anm.jpg?raw=true" alt="Nursing Mentors">
         </div>
-    </section>
-    
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <span class="admission-text">Demo class Video</span>
+        </div>
+        
+        <div class="video-wrapper">
+            <video 
+                controls 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                poster="https://github.com/firststepbio9-arch/First-Step-Biology/blob/main/anm.jpg?raw=true">
+                <source src="4267248-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
     <div class="content">
-        <h1 class="main-title">NURSING ANM/GNM ADMISSION OPEN</h1>
-        <p class="batch-date">Course shuru hone ki tarikh 11 March, 2026 hai.</p>
-        <p class="description">WB Nursing Entrance (JENPAS-UG aur ANM-GNM) ki taiyari Bengali coaching ke madhyam se Government Nursing College mein seat pakki karne ke liye.</p>
-        
-        <div class="features">
-            <h3>Features</h3>
-            <ul>
-                <li>9 months subscription</li>
-                <li>Daily 1 hour 15 mins classes</li>
-                <li>Subjective tests</li>
-                <li>Chapter-wise PDF notes</li>
-                <li>Mock tests</li>
-            </ul>
+        <div class="start-date-box">
+            <strong>Starts On</strong><br>
+            <span class="date-text">11 March, 2026</span>
         </div>
+
+        <h2>Crack the WB Nursing Entrance with Top Mentors</h2>
+        <p>From JENPAS-UG (B.Sc Nursing) to ANM-GNM, We provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College.</p>
         
-        <div class="syllabus">
-            <h3>Syllabus</h3>
-            <ul>
-                <li>Life Science</li>
-                <li>Physical Science</li>
-                <li>Mathematics</li>
-                <li>English</li>
-                <li>GK</li>
-                <li>Logical Reasoning</li>
-            </ul>
-        </div>
+        <p><strong>[Free Demo Class in Bengali]</strong></p>
+
+        <h3>Batch Features </h3>
+        <ul class="features-list">
+            <li>Offline + online and recorded lectures by top faculties</li>
+            <li>Subscription plans available: 9 months </li>
+            <li>Subjective Tests with Solution</li>
+            <li>Chapter wise Study material (PDF format)</li>
+            <li>Duration of the lectures will be 1 hour 15 mins</li>
+            <li>Mock tests with expert analysis</li>
+            <li>PDF notes of each class will be uploaded on "1st Step Biology" app</li>
+        </ul>
+
+        <p><i>This batch is completely based on WBJEEB(ANM-GNM) entrance exam only.</i></p>
+        
+        <p><strong>Syllabus Covered:</strong> Life science, Physical science, Mathematics, Basic English, GK & Logical Reasoning.</p>
     </div>
-    
-    <div class="sticky-footer">
-        <a href="tel:7001730930" class="call-now">Call Now</a>
-        <a href="https://play.google.com/store/apps/details?id=com.example.nursingapp" class="download-app">Download App</a>
+
+    <div class="cta-container">
+        <a href="tel:7001730930" class="btn btn-call">
+            CALL NOW <br>
+            7001730930
+        </a>
+        <a href="https://play.google.com/store" class="btn btn-app">
+            DOWNLOAD APP<br>
+            First Step Biology 
+        </a>
     </div>
+</div>
+
 </body>
 </html>
