@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,135 +13,152 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f2f5;
             color: #333;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px; /* Mobile optimized width */
             margin: 0 auto;
             background: #fff;
-            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
-        /* BANNER SECTION */
+        /* HEADER SECTION */
         .banner-header {
-            background-color: #fff;
             text-align: center;
-            position: relative;
+            padding: 15px 10px;
         }
 
         .offline-tag {
             background: #9d4edd;
             color: white;
-            padding: 5px 20px;
+            padding: 4px 15px;
             font-weight: bold;
             display: inline-block;
             clip-path: polygon(100% 0%, 95% 50%, 100% 100%, 0% 100%, 0% 0%);
-            margin-top: 10px;
+            font-size: 14px;
         }
 
         .main-title {
             color: var(--primary-red);
-            font-size: 50px;
+            font-size: 42px;
             font-weight: 900;
             margin: 5px 0;
-            -webkit-text-stroke: 1px #000;
+            letter-spacing: -1px;
+            text-transform: uppercase;
         }
 
         .course-badge {
             background: var(--yellow-accent);
             color: #000;
-            font-size: 32px;
+            font-size: 26px;
             font-weight: bold;
-            padding: 5px 30px;
+            padding: 5px 25px;
             display: inline-block;
             border: 2px solid #000;
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
 
         .admission-text {
             color: var(--purple-main);
-            font-size: 28px;
+            font-size: 22px;
             font-weight: bold;
             display: block;
         }
 
-        /* MEDIA INSERTION SLOTS */
+        /* MEDIA SECTION */
         .media-container {
-            padding: 15px;
-            background: #f9f9f9;
+            padding: 10px;
         }
 
         .banner-image-container img {
             width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* VIDEO STYLING - FIXED FOR MOBILE */
+        .video-box {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            line-height: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        video {
+            width: 100%;
             height: auto;
             display: block;
-            border: 2px solid #ddd;
         }
 
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            margin-top: 15px;
+        .video-label {
+            background: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--purple-main);
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* DETAILS SECTION */
+        /* CONTENT SECTION */
         .content {
             padding: 20px;
         }
 
         .start-date-box {
-            border: 2px solid #ddd;
+            background: #e9f5ee;
+            border: 1px dashed #2d6a4f;
             text-align: center;
             padding: 15px;
-            margin: 15px 0;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .date-text {
             color: #2d6a4f;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
         }
 
         .features-list {
-            padding-left: 20px;
-            line-height: 1.8;
+            padding-left: 18px;
+            line-height: 1.6;
+            font-size: 15px;
         }
 
-        /* CTA BUTTONS */
+        .features-list li {
+            margin-bottom: 8px;
+        }
+
+        /* STICKY FOOTER BUTTONS */
         .cta-container {
             display: flex;
-            justify-content: space-between;
-            padding: 20px;
+            padding: 12px;
             gap: 10px;
             position: sticky;
             bottom: 0;
             background: white;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-top: 1px solid #eee;
         }
 
         .btn {
             flex: 1;
-            padding: 15px;
+            padding: 12px 5px;
             text-align: center;
             text-decoration: none;
             font-weight: bold;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .btn-call {
@@ -153,10 +171,10 @@
             color: white;
         }
 
+        /* MOBILE OPTIMIZATION */
         @media (max-width: 480px) {
-            .main-title { font-size: 35px; }
-            .course-badge { font-size: 24px; }
-            .cta-container { flex-direction: column; }
+            .main-title { font-size: 36px; }
+            .btn { font-size: 13px; }
         }
     </style>
 </head>
@@ -165,63 +183,79 @@
 <div class="container">
     <div class="banner-header">
         <div class="offline-tag">Offline + Online </div>
-        <h1 class="main-title">NURSING </h1>
-        <div class="course-badge">ANM/GNM</div>
-        <span class="admission-text">ADMISSION OPEN</span>
+        <h1 class="main-title">NURSING</h1>
+        <div class="course-badge">ANM / GNM</div>
+        <span class="admission-text">ADMISSION OPEN 2026</span>
     </div>
 
     <div class="media-container">
         <div class="banner-image-container">
-            <img src="https://github.com/firststepbio9-arch/First-Step-Biology/blob/main/anm.jpg?raw=true" alt="Nursing Mentors">
+            <img src="ANM.jpg" alt="Nursing Mentors">
         </div>
+
+        <div class="video-label">📽️ Watch Demo Class Below</div>
         
-<div class="container">
-    <span class="admission-text">Demo class Video</span>
-</div>
-        
-        <div class="video-container">
-            <iframe src="4267248-uhd_3840_2160_30fps.mp4" frameborder="0" allowfullscreen>></iframe>
+        <div class="video-box">
+            <video 
+                id="demoVideo"
+                controls
+                playsinline
+                poster="#">
+                <source src="Demo-class-nature-Video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+        <p style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">
+            (Tap on video for Pause/Play)
+        </p>
     </div>
 
     <div class="content">
         <div class="start-date-box">
-            <strong>Starts On</strong><br>
-            <span class="date-text">11 March, 2026</span>
+            <strong>NEW BATCH STARTS ON</strong><br>
+            <span class="date-text">11th March, 2026</span>
         </div>
 
-        <h2>Crack the WB Nursing Entrance with Top Mentors</h2>
-        <p>From JENPAS-UG (B.Sc Nursing) to ANM-GNM, We provide the specialized Bengali coaching you need to secure a seat in a Government Nursing College.</p>
-        
-        <p><strong>[Free Demo Class in Bengali]</strong></p>
+        <h2 style="font-size: 20px; color: #333;">Crack WB Nursing with Top Mentors</h2>
+        <p style="font-size: 15px; color: #555;">Get specialized Bengali coaching for JENPAS-UG and ANM-GNM to secure your Government College seat.</p>
 
-        <h3>Batch Features </h3>
+        <h3 style="font-size: 18px; border-bottom: 2px solid var(--yellow-accent); display: inline-block;">Batch Features</h3>
         <ul class="features-list">
-            <li>Offline + online and recorded lectures by top faculties</li>
-            <li>Subscription plans available: 9 months </li>
-            <li>Subjective Tests with Solution</li>
-            <li>Chapter wise Study material (PDF format)</li>
-            <li>Duration of the lectures will be 1 hour 15 mins</li>
-            <li>Mock tests with expert analysis [cite: 23]</li>
-            <li>PDF notes of each class will be uploaded on "1st Step Biology" app</li>
+            <li><strong>Live + Recorded</strong> lectures by experts</li>
+            <li><strong>9 Months</strong> complete subscription</li>
+            <li>Subjective Tests with detailed solutions</li>
+            <li>Chapter-wise PDF Study Materials</li>
+            <li>Daily lectures (1 hour 15 mins each)</li>
+            <li>Mock tests with expert performance analysis</li>
+            <li>Notes available on <b>"1st Step Biology"</b> App</li>
         </ul>
 
-        <p><i>This batch is completely based on WBJEEB(ANM-GNM) entrance exam only.</i></p>
-        
-        <p><strong>Syllabus Covered:</strong> Life science, Physical science, Mathematics, Basic English, GK & Logical Reasoning.</p>
+        <p style="background: #fff3cd; padding: 10px; border-radius: 5px; font-size: 14px;">
+            <b>Syllabus:</b> Life Science, Physical Science, Mathematics, English, GK & Reasoning.
+        </p>
     </div>
 
     <div class="cta-container">
-        <a href="tel:7001730930" class="btn btn-call">
-            CALL NOW <br>
-            7001730930
+        <a href="tel:+917001730930" class="btn btn-call">
+            <span>CALL NOW</span>
+            <span style="font-size: 16px;">7001730930</span>
         </a>
         <a href="https://play.google.com/store" class="btn btn-app">
-            DOWNLOAD APP<br>
-            First Step Biology 
+            <span>DOWNLOAD APP</span>
+            <span style="font-size: 12px;">First Step Biology</span>
         </a>
     </div>
 </div>
+
+<script>
+    // Mobile par autoplay ensure karne ke liye chota sa script
+    window.addEventListener('load', function() {
+        var video = document.getElementById('demoVideo');
+        video.play().catch(function(error) {
+            console.log("Autoplay blocked, user interaction needed for sound.");
+        });
+    });
+</script>
 
 </body>
 </html>
