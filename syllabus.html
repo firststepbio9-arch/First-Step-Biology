@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus Portal</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .syllabus-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .syllabus-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .syllabus-card h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.3s;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .semester-btn {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .semester-btn:hover {
+            background-color: #d1fae5;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .section-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Syllabus Repository</h1> [cite: 1]
+    </header>
+
+    <div class="section-grid">
+        <div class="syllabus-card">
+            <h2>Class 9th Science [cite: 2]</h2>
+            <div class="cta-group">
+                <a href="#" class="cta-button">Life Science [cite: 3]</a>
+                <a href="#" class="cta-button">Physical Science [cite: 4]</a>
+                <a href="#" class="cta-button">Mathematics [cite: 5]</a>
+            </div>
+        </div>
+
+        <div class="syllabus-card">
+            <h2>Class 10th Science [cite: 6]</h2>
+            <div class="cta-group">
+                <a href="#" class="cta-button">Life Science [cite: 7]</a>
+                <a href="#" class="cta-button">Physical Science [cite: 8]</a>
+                <a href="#" class="cta-button">Mathematics [cite: 9]</a>
+            </div>
+        </div>
+
+        <div class="syllabus-card">
+            <h2>Class 11th & 12th [cite: 10, 12]</h2>
+            <div class="cta-group">
+                <a href="#" class="cta-button">Class 11 Biology [cite: 11]</a>
+                <a href="#" class="cta-button">Class 12 Biology [cite: 13]</a>
+            </div>
+        </div>
+
+        <div class="syllabus-card">
+            <h2>B.Sc Botany (Hons.) [cite: 14]</h2>
+            <div class="cta-group">
+                <a href="#" class="cta-button semester-btn">Sem I [cite: 15]</a>
+                <a href="#" class="cta-button semester-btn">Sem II [cite: 16]</a>
+                <a href="#" class="cta-button semester-btn">Sem III [cite: 17]</a>
+                <a href="#" class="cta-button semester-btn">Sem IV [cite: 18]</a>
+                <a href="#" class="cta-button semester-btn">Sem V [cite: 19]</a>
+                <a href="#" class="cta-button semester-btn">Sem VI [cite: 20]</a>
+            </div>
+        </div>
+
+        <div class="syllabus-card">
+            <h2>B.Sc Zoology (Hons.) [cite: 21]</h2>
+            <div class="cta-group">
+                <a href="#" class="cta-button semester-btn">Sem I [cite: 22]</a>
+                <a href="#" class="cta-button semester-btn">Sem II [cite: 23]</a>
+                <a href="#" class="cta-button semester-btn">Sem III [cite: 24]</a>
+                <a href="#" class="cta-button semester-btn">Sem IV [cite: 25]</a>
+                <a href="#" class="cta-button semester-btn">Sem V [cite: 26]</a>
+                <a href="#" class="cta-button semester-btn">Sem VI [cite: 27]</a>
+            </div>
+        </div>
+
+        <div class="syllabus-card">
+            <h2>Nursing & Entrance</h2>
+            <div class="cta-group">
+                <a href="#" class="cta-button">ANM/GNM [cite: 28, 29]</a>
+                <a href="#" class="cta-button">B.Sc Nursing [cite: 30, 31]</a>
+                <a href="#" class="cta-button">NEET Biology [cite: 32, 33]</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
