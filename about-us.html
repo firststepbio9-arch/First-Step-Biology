@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | First Step Biology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --primary-light: #52b788;
+            --accent: #d8f3dc;
+            --dark: #081c15;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f0f7f4;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(135deg, rgba(45, 106, 79, 0.92), rgba(8, 28, 21, 0.85)), 
+                        url('https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Mission & Vision Grid */
+        .mv-section {
+            padding: 5rem 0;
+            margin-top: -100px;
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .mv-card {
+            background: var(--glass);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .mv-card:hover { transform: translateY(-10px); }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Story Section */
+        .story-section { padding: 5rem 0; }
+        .highlight-text { color: var(--primary); font-weight: 700; }
+
+        /* Team Section */
+        .team-section { background: var(--dark); color: var(--white); padding: 6rem 0; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+
+        .team-card:hover { background: var(--primary); }
+
+        .team-card h3 { margin-bottom: 0.5rem; color: var(--primary-light); }
+        .team-card:hover h3 { color: white; }
+        .role { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 1rem; opacity: 0.7; }
+
+        /* Contact Footer */
+        .footer {
+            padding: 5rem 0;
+            background: var(--accent);
+            text-align: center;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            gap: 1.5rem;
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .contact-pill a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .contact-pill a:hover { color: var(--dark); }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>First Step Biology</h1>
+            <p>Transforming curiosity into a successful career in science, one student at a time.</p>
+        </div>
+    </section>
+	
+<section class="story-section container reveal">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div style="margin-bottom: 2.5rem;">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400" 
+                 alt="Snehashis Gorain - Founder" 
+                 style="width: 200px; height: 200px; border-radius: 50%; border: 4px solid var(--primary); object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        </div>
+        
+        <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Story</h2>
+        <p style="font-size: 1.2rem;">
+            Every great journey begins with a single step—and for us, that step was taken at a simple 
+            <span class="highlight-text">whiteboard in 2011</span>. First Step Biology wasn't built in a corporate office; 
+            it was built in the classroom. 
+            <br><br>
+            Our founder, <strong>Snehashis Gorain</strong>, began his journey over a decade ago as a dedicated tuition teacher. 
+            Armed with only a marker and a passion for life sciences, he created a platform to provide the clarity 
+            every student needs.
+        </p>
+    </div>
+	
+</section>
+
+    <section class="mv-section">
+        <div class="container mv-grid">
+            <div class="mv-card">
+                <div class="icon-box"><i class="fas fa-bullseye"></i></div>
+                <h2>Our Mission</h2>
+                <p>To bridge the gap between <strong>"I don't get it"</strong> and <strong>"Aha!"</strong> moments. We transform complex theories into clear, actionable knowledge.</p>
+            </div>
+            <div class="mv-card">
+                <div class="icon-box"><i class="fas fa-eye"></i></div>
+                <h2>Our Vision</h2>
+                <p>To become the leading <strong>Digital Sanctuary</strong> for sciences in West Bengal, making quality education accessible to every dreamer.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet the Team</h2>
+                <p>The experts behind your success</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card reveal">
+                    <span class="role">Founder & Lead Educator</span>
+                    <h3>Snehashis Gorain</h3>
+                    <p>Molecular Biology expert with 14 years of teaching experience. The creative force behind our curriculum.</p>
+                </div>
+                <div class="team-card reveal">
+                    <span class="role">Visionary & Chief Coordinator</span>
+                    <h3>Nilanjana Singha Deo</h3>
+                    <p>The soul behind the name, who envisioned transforming traditional classrooms into a digital sanctuary.</p>
+                </div>
+                <div class="team-card reveal">
+                    <span class="role">Subject Matter Expert</span>
+                    <h3>Mr. Udit Narayan Ghose</h3>
+                    <p>Curates precise, high-yielding resources to meet the needs of today's busy students.</p>
+                </div>
+                <div class="team-card reveal">
+                    <span class="role">Technical Lead</span>
+                    <h3>Debashis Hazra</h3>
+                    <p>The digital backbone ensuring a seamless experience across our website and application.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>Join our Facebook page, <strong>‘1st Step Biology’</strong>, for bite-sized facts and study tips.</p>
+            <div class="contact-pill">
+                <a href="mailto:firststepbio9@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://wa.me/700170930"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="tel:7001730930"><i class="fas fa-phone"></i> 7001730930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body>
+</html>
